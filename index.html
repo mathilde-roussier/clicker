@@ -19,20 +19,46 @@
 				 	<input id="tab-1" checked="checked" name="tab-group-1" type="radio" /> 
 				 	<label id="label_tab1" for="tab-1"></label> 
 				 	<div class="content"> 
-				 		<h1 id="click_damage">Click Damage : 1</h1> 
+				 		<h1 id="click_damage">Dégâts par clique : 1</h1> 
 				 		<h1 id="damage_seconde">Dégâts par seconde : 0</h1>
 				 		<br/> 
-				 		<div>
-				 			<p>Bonus clique</p>
+				 		<div class="element">
+				 			<p class="element_name">Dégâts par clique</p>
+				 				<div class="niveau_prix">
+				 					<p id="niv_bonus_clique">Niv.1</p>
+				 					<div>
+				 						<p id="prix_bonus_clique">5</p>
+				 						<div id="logo_pièce"></div>
+				 					</div>
+				 				</div>
 				 			<button id="bonus_clique">Acheter</button>
 				 		</div>
-				 		<div>
-				 			<p>Auto damage</p>
+				 		<div class="element">
+				 			<p class="element_name">Dégâts par seconde</p>
+				 			<div class="niveau_prix">
+				 				<p id="niv_auto_damage">Niv.1</p>
+				 				<div>
+				 					<p id="prix_bonus_auto_damage">50</p>
+				 					<div id="logo_pièce"></div>
+				 				</div>
+				 			</div>
 				 			<button id="auto_damage">Acheter</button>
 				 		</div>
-				 		<div>
-				 			<p>Critical damage</p>
+				 		<div class="element">
+				 			<p class="element_name">Dégâts critiques</p>
+				 			<div class="niveau_prix" id="max_niv_luck">
+				 				<p id="niv_luck">Niv.1</p>
+				 				<div>
+				 					<p id="prix_bonus_luck">1000</p>
+				 					<div id="logo_pièce"></div>
+				 				</div>
+				 			</div>
 				 			<button id="luck">Acheter</button>
+				 		</div>
+				 		<div class="element">
+				 			<p class="element_name">Sous récoltés</p>
+				 			<p id="niv_money">Niv.1</p>
+				 			<button id="money">Acheter</button>
 				 		</div>
 				 	</div> 
 				 </div>  
@@ -40,14 +66,14 @@
 				 	<input id="tab-2" name="tab-group-1" type="radio" />
 				 	 <label id="label_tab2" for="tab-2"></label> 
 				 	 <div class="content"> 
-				 	 	<div>
-				 	 		<p id="click_profil">Click Damage : 1</hp> 
+				 	 	<div class="profil">
+				 	 		<p id="click_profil">Dégats par clique : 1</hp> 
 				 	 	</div>
-				 	 	<div>
-				 			<p id="damage_profil">Dégâts par seconde : 0</p>
+				 	 	<div class="profil">
+				 			<p id="damage_profil">Dégâts automatique: 0</p>
 				 	 	</div>
-				 	 	<div>
-				 	 		<p id="chance_critique">Chance de critique : 0.0%</p>
+				 	 	<div class="profil">
+				 	 		<p id="chance_critique">Dégâts critiques : 0.0%</p>
 				 	 	</div>
 				 	 </div> 
 				 </div>  
