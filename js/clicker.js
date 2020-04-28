@@ -1,16 +1,20 @@
 $(document).ready(function () {
 
-    $('#monstre').html('monstre1');
+    var nam = 'monstre';
+    var monstre = new Monstre("20");
+    var moi = new User();
 
-    let point = 0;
-    let life = 20;
+    $('#monster_life').attr("max", monstre.getLife()).attr("value", monstre.getLife());
+
+    $('#monstre').html(nam);
 
     $('#monstre').click(function () {
-        point = point + 1;
-        life = life - 1;
-        $('#point').html(point);
-        if (life <= 0) {
-            $('#monstre').html('dead');
+        monstre.attaque();
+        $('#monster_life').attr("value", monstre.getNewLife());
+        if (monstre.getNewLife() <= 0) {
+            $('#monster_life').attr("value", monstre.getLife());
+            monstre.setNewLife();
+            $('#point').html(moi.setPoint());
         }
     })
 
