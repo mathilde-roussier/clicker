@@ -13,7 +13,7 @@ button:hover{
 	font-size: 11pt;
 	color:black;
   height: 800px;
-  margin-top: 5%;
+  margin-top: 80px;
 	}
 	
 #menu-tab a {
@@ -224,4 +224,26 @@ color: green;
 #label_tab2{
 
   background-image: url(../img/profil.png);
+}
+
+
+/*MONNAIE*/
+
+.monnaie{
+
+  background: rgba(155, 127, 40, 0.38);
+  padding: 15px 35px;
+  width: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0px 0px 10px 0px;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.71)
+}
+
+.monnaie div{
+
+  display: flex;
+  justify-content: space-between;
+  width: 50px;
 }
