@@ -2,10 +2,25 @@ class User{
 
     constructor() {
         this.point = 0;
+        this.degat = 1;
+        this.degatDPS = 0.25;
+        this.pnt = 1;
     }
 
-    setPoint() {
-        this.point = this.point + 10;
+    setPoint(pnt) {
+        this.point = this.point + pnt;
         return this.point;
+    }
+
+    getDegat() {
+        return this.degat;
+    }
+
+    getDegatDPS() {
+        return this.degatDPS;
+    }
+
+    getPnt() {
+        return this.pnt;
     }
 }
