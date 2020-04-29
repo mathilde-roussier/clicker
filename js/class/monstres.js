@@ -33,8 +33,8 @@ class Monstre {
         this.#life = this.#life * X;
     }
 
-    setDpsNewLife(life_actuel, degatdps) {
-        this.#newLife = life_actuel * 1 - degatdps;
+    setDpsNewLife(life_actuel, dps) {
+        this.#newLife = life_actuel * 1 - dps;
     }
 
     getMort() {

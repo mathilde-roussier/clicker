@@ -13,7 +13,7 @@ $(document).ready(function () {
     $('#monstre').click(function () {
         monstre.attaque(user.getDegat());
         $('#monster_life').attr("value", monstre.getNewLife());
-        $('#point').html(user.setPoint(user.getPnt()));
+        $('#point').html(user.setPoint(user.getMonnaie()));
         if (monstre.getNewLife() <= 0) {
             $('#monster_life').attr("value", monstre.getLife());
             monstre.MajNewLife();
@@ -43,6 +43,6 @@ function dps(user, monstre) {
             $('#monster_life').attr("max", monstre.getLife()).attr("value", monstre.getLife());
         }
     }
-    monstre.setDpsNewLife(life_actuel, user.getDegatDPS());
+    monstre.setDpsNewLife(life_actuel, user.getDPS());
     $('#monster_life').attr('value', monstre.getNewLife());
 }

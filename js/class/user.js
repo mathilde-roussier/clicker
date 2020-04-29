@@ -3,14 +3,14 @@ class User {
 
     #point;
     #degat;
-    #degatDPS;
-    #pnt;
+    #DPS;
+    #monnaie;
 
     constructor() {
         this.#point = 0;
         this.#degat = 1;
-        this.#degatDPS = 1;
-        this.#pnt = 1;
+        this.#DPS = 0;
+        this.#monnaie = 1;
     }
 
     setPoint(pnt) {
@@ -18,15 +18,27 @@ class User {
         return this.#point;
     }
 
+    setMonnaie(bonus_monnaie) {
+        this.#monnaie = this.#monnaie + bonus_monnaie;
+    }
+
+    setDegat(bonus_degat) {
+        this.#degat = this.#degat + bonus_degat;
+    }
+
+    setDPS(bonus_DPS) {
+        this.#DPS = this.#DPS + bonus_DPS;
+    }
+
     getDegat() {
         return this.#degat;
     }
 
-    getDegatDPS() {
-        return this.#degatDPS;
+    getDPS() {
+        return this.#DPS;
     }
 
-    getPnt() {
-        return this.#pnt;
+    getMonnaie() {
+        return this.#monnaie;
     }
 }
