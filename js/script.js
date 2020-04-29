@@ -1,5 +1,8 @@
+const user = new User();
+const monstre = new Monstre("10");
+
 // MIONTANT MONAIE
-let monnaie = 500
+let monnaie =  user.getPoint()
 let monnaie_depensee = 0
 
 // BONUS 1 (dommage par clique)
@@ -32,25 +35,41 @@ etat_des_sous_disponible()
 
 function etat_des_sous_disponible(){
 	$(document).ready(function(){
-		
+
 		if(monnaie - prix_bonus_clique < 0)
 		{
 			$("#bonus_clique").text("Pas disponible")
+		}
+		else
+		{
+			$("#bonus_clique").text("Acheter")
 		}
 		
 		if(monnaie - prix_bonus_sous < 0)
 		{
 			$("#sous").text("Pas disponible")
 		}
+		else
+		{
+			$("#sous").text("Acheter")
+		}
 	
 		if(monnaie - prix_bonus_damage < 0)
 		{
 			$("#auto_damage").text("Pas disponible")
 		}
+		else
+		{
+			$("#auto_damage").text("Acheter")
+		}
 			
 		if(monnaie - prix_bonus_luck < 0)
 		{
 			$("#luck").text("Pas disponible")
+		}
+		else
+		{
+			$("#luck").text("Acheter")
 		}
 	});
 }
@@ -58,12 +77,6 @@ function etat_des_sous_disponible(){
 //FONCTION RANDOM CHIFFRE ALEATOIRE
 function getRandomInt(max) {
 	return Math.floor(Math.random() * Math.floor(max));
-}
-
-function montant_monnaie(){
-
-	$("#montant").text(monnaie)
-
 }
 
 
@@ -79,7 +92,7 @@ function bonus_clique()
 	$("#niv_bonus_clique").text("Niv."+niv_bonus_clique)
 	$("#prix_bonus_clique").text(prix_bonus_clique)
 	$("#sous_utilise").text("Monnaie dépensée :"+monnaie_depensee)
-	montant_monnaie()
+	$('#montant').html(monnaie);
 }
 
 function auto_damage()
@@ -94,7 +107,7 @@ function auto_damage()
 	$("#niv_auto_damage").text("Niv. "+niv_auto_damage)
 	$("#prix_bonus_auto_damage").text(prix_bonus_damage)
 	$("#sous_utilise").text("Monnaie dépensée :"+monnaie_depensee)
-	montant_monnaie()
+	$('#montant').html(monnaie);
 }
 
 function bonus_sous()
@@ -108,7 +121,7 @@ function bonus_sous()
 	$("#niv_sous").text("Niv. "+niv_sous)
 	$("#prix_bonus_sous").text(prix_bonus_sous)
 	$("#sous_utilise").text("Monnaie dépensée :"+monnaie_depensee)
-	montant_monnaie()
+	$('#montant').html(monnaie);
 }
 
 function bonus_luck()
@@ -140,14 +153,15 @@ function bonus_luck()
 			// INFLIGER COUP CRITIQUE = clickdamage *X (X à définir)
 	}
 	$("#sous_utilise").text("Monnaie dépensée :"+monnaie_depensee)
-	montant_monnaie()
+	$('#montant').html(monnaie);
 }
 
 
 $(document).ready(function(){
 
-	
-	montant_monnaie()
+
+	$("#montant").html(monnaie)
+
 	// BONUS POUR DEGATS PAR CLIQUE
 	$("body").on("click","#bonus_clique",function(){
 		etat_des_sous_disponible()
@@ -181,7 +195,60 @@ $(document).ready(function(){
 			bonus_sous()
 		}
 	});
+
+
+	var nam = 'monstre';
+
+    $('#monster_life').attr("max", monstre.getLife()).attr("value", monstre.getLife());
+
+    $('#monstre').html(nam);
+
+    dps(user, monstre);
+
+    $('#monstre').click(function () {
+    	etat_des_sous_disponible()
+        monstre.attaque(user.getDegat());
+
+
+		// user.soustractionPoint(monnaie_depensee) 	
+		monnaie=user.setPoint(user.getMonnaie())
+
+        $('#monster_life').attr("value", monstre.getNewLife());
+        $('#montant').html(monnaie);
+        if (monstre.getNewLife() <= 0) {
+            $('#monster_life').attr("value", monstre.getLife());
+            monstre.MajNewLife();
+            $('#point').html(user.setPoint(monstre.getMort()));
+            monstre.setnb_mort();
+            if (monstre.getnb_mort() % 10 == 0) {
+                monstre.MajLife(2);
+                monstre.MajNewLife();
+                $('#monster_life').attr("max", monstre.getLife()).attr("value", monstre.getLife());
+            }
+        }
+    })
+
+    setInterval(function () { dps(user, monstre); }, 1000);
+
 });
+
+
+
+function dps(user, monstre) {
+    var life_actuel = $('#monster_life').attr('value');
+    if (life_actuel <= 0) {
+        life_actuel = monstre.getLife();
+        $('#point').html(user.setPoint(monstre.getMort()));
+        monstre.setnb_mort();
+        if (monstre.getnb_mort() % 10 == 0) {
+            monstre.MajLife(2);
+            life_actuel = monstre.MajNewLife();
+            $('#monster_life').attr("max", monstre.getLife()).attr("value", monstre.getLife());
+        }
+    }
+    monstre.setDpsNewLife(life_actuel, user.getDPS());
+    $('#monster_life').attr('value', monstre.getNewLife());
+}
 
 
 

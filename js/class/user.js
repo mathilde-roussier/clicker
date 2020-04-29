@@ -18,6 +18,15 @@ class User {
         return this.#point;
     }
 
+    getPoint() {
+
+        return this.#point;
+    }
+    soustractionPoint(depense) {
+
+        this.#point = this.#point - depense
+    }
+
     setMonnaie(bonus_monnaie) {
         this.#monnaie = this.#monnaie + bonus_monnaie;
     }
