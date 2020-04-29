@@ -1,9 +1,10 @@
-class  Monstre {
+class Monstre {
 
     constructor(vie) {
         this.life = vie;
         this.newLife = this.life;
         this.mort = 10;
+        this.nb_mort = 0;
     }
 
     getLife() {
@@ -19,15 +20,26 @@ class  Monstre {
     }
 
     MajNewLife() {
-        this.newLife = this.getLife();
+        this.newLife = this.life;
         return this.newLife;
     }
 
-    setDpsNewLife(life_actuel,degatdps) {
+    MajLife(X) {
+        this.life = this.life * X;
+    }
+
+    setDpsNewLife(life_actuel, degatdps) {
         this.newLife = life_actuel * 1 - degatdps;
     }
 
     getMort() {
         return this.mort;
+    }
+
+    setnb_mort() {
+        this.nb_mort = this.nb_mort + 1;
+    }
+    getnb_mort() {
+        return this.nb_mort;
     }
 }

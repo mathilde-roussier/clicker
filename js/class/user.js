@@ -3,7 +3,7 @@ class User{
     constructor() {
         this.point = 0;
         this.degat = 1;
-        this.degatDPS = 0.25;
+        this.degatDPS = 1;
         this.pnt = 1;
     }
 
