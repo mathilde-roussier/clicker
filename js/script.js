@@ -31,50 +31,29 @@ let prix_bonus_sous = 25
 etat_des_sous_disponible()
 
 function etat_des_sous_disponible(){
-
-	etat_bonus_clique()
-	etat_bonus_damage_seconde()
-	etat_bonus_luck()
-	etat_bonus_sous()
-}
-
-function etat_bonus_clique(){
 	$(document).ready(function(){
+		
 		if(monnaie - prix_bonus_clique < 0)
 		{
 			$("#bonus_clique").text("Pas disponible")
 		}
-	});
-}
-
-function etat_bonus_sous(){
-	$(document).ready(function(){
+		
 		if(monnaie - prix_bonus_sous < 0)
 		{
 			$("#sous").text("Pas disponible")
 		}
-	});
-}
-
-function etat_bonus_damage_seconde(){
-	$(document).ready(function(){
+	
 		if(monnaie - prix_bonus_damage < 0)
 		{
 			$("#auto_damage").text("Pas disponible")
 		}
-	});
-}
-
-function etat_bonus_luck(){
-	$(document).ready(function(){
+			
 		if(monnaie - prix_bonus_luck < 0)
 		{
 			$("#luck").text("Pas disponible")
 		}
 	});
 }
-
-
 
 //FONCTION RANDOM CHIFFRE ALEATOIRE
 function getRandomInt(max) {
