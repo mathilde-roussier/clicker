@@ -8,7 +8,9 @@
 		<!-- JQUERY -->
 		<script type="text/javascript" src="js/jquery-3.5.0.min"></script>
 		<!-- MON SCRIPT -->
-		<script type="text/javascript" src="js/script.js"></script>
+		<script src='js/class/monstres.js'></script>
+    	<script src='js/class/user.js'></script>
+    	<script type="text/javascript" src="js/script.js"></script>
 	</head>
 
 <body>
@@ -18,96 +20,97 @@
 			<p id="montant"></p>
 		</div>
 	</div>
-	<div id="menu-tab">
-		<div id="page-wrap"> 
-			<div class="tabs">
-				 <div class="tab">
-				 	<input id="tab-1" checked="checked" name="tab-group-1" type="radio" /> 
-				 	<label id="label_tab1" for="tab-1"></label> 
-				 	<div class="content"> 
-				 		<h1 id="click_damage">Dégâts par clique : 1</h1> 
-				 		<h1 id="damage_seconde">Dégâts par seconde : 0</h1>
-				 		<br/> 
-				 		<div class="element">
-				 			<p class="element_name">Dégâts par clique</p>
-				 				<div class="niveau_prix">
-				 					<p id="niv_bonus_clique">Niv.1</p>
-				 					<div>
-				 						<p id="prix_bonus_clique">5</p>
-				 						<div id="logo_pièce"></div>
-				 					</div>
-				 				</div>
-				 			<button id="bonus_clique">Acheter</button>
-				 		</div>
-				 		<div class="element">
-				 			<p class="element_name">Gain de sous</p>
-				 			<div class="niveau_prix">
-				 				<p id="niv_sous">Niv.1</p>
-				 				<div>
-				 					<p id="prix_bonus_sous">25</p>
-				 					<div id="logo_pièce"></div>
-				 				</div>
-				 			</div>
-				 			<button id="sous">Acheter</button>
-				 		</div>
-				 		<div class="element">
-				 			<p class="element_name">Dégâts par seconde</p>
-				 			<div class="niveau_prix">
-				 				<p id="niv_auto_damage">Niv.1</p>
-				 				<div>
-				 					<p id="prix_bonus_auto_damage">50</p>
-				 					<div id="logo_pièce"></div>
-				 				</div>
-				 			</div>
-				 			<button id="auto_damage">Acheter</button>
-				 		</div>
-				 		<div class="element">
-				 			<p class="element_name">Dégâts critiques</p>
-				 			<div class="niveau_prix" id="max_niv_luck">
-				 				<p id="niv_luck">Niv.1</p>
-				 				<div>
-				 					<p id="prix_bonus_luck">1000</p>
-				 					<div id="logo_pièce"></div>
-				 				</div>
-				 			</div>
-				 			<button id="luck">Acheter</button>
-				 		</div>
-				 	</div> 
-				 </div>  
-				 <div class="tab">
-				 	<input id="tab-2" name="tab-group-1" type="radio" />
-				 	 <label id="label_tab2" for="tab-2"></label> 
-				 	 <div class="content"> 
-				 	 	<div class="profil">
-				 	 		<p id="click_profil">Dégats par clique : 1</hp> 
-				 	 	</div>
-				 	 	<div class="profil">
-				 			<p id="damage_profil">Dégâts automatique: 0</p>
-				 	 	</div>
-				 	 	<div class="profil">
-				 	 		<p id="chance_critique">Dégâts critiques : 0.0%</p>
-				 	 	</div>
-				 	 	<div class="profil">
-				 	 		<p id="gain_de_sous">Gain de sous : 1</p>
-				 	 	</div>
-				 	 	<div class="profil">
-				 	 		<p id="sous_utilise">Monnaie dépensée : 0</p>
-				 	 		<div id="logo_pièce"></div>
-				 	 	</div>
-				 	 </div> 
-				 </div>  
-				<!--  <div class="tab">
-				 	<input id="tab-3" name="tab-group-1" type="radio" /> 
-				 	<label for="tab-3">Forum</label> 
-				 	<div class="content"> 
-				 		<p>Exemple, une image, et une video...</p> <br /> 
-				 		<p><img src="http://ekladata.com/UM-RXN_kZ3q93_FwWhFA15FP_uc.jpg" alt="" /></p> 
-				 	</div>  -->
-				 </div> 
-			</div> 
-		</div> 
-	</div>
+
+<main>
+	<article class="espace_jeu">
+		<div id="menu-tab">
+			<div id="page-wrap"> 
+				<div class="tabs">
+					 <div class="tab">
+					 	<input id="tab-1" checked="checked" name="tab-group-1" type="radio" /> 
+					 	<label id="label_tab1" for="tab-1"></label> 
+					 	<div class="content"> 
+					 		<h1 id="click_damage">Dégâts par clique : 1</h1> 
+					 		<h1 id="damage_seconde">Dégâts par seconde : 0</h1>
+					 		<br/> 
+					 		<div class="element">
+					 			<p class="element_name">Dégâts par clique</p>
+					 				<div class="niveau_prix">
+					 					<p id="niv_bonus_clique">Niv.1</p>
+					 					<div>
+					 						<p id="prix_bonus_clique">5</p>
+					 						<div id="logo_pièce"></div>
+					 					</div>
+					 				</div>
+					 			<button id="bonus_clique">Acheter</button>
+					 		</div>
+					 		<div class="element">
+					 			<p class="element_name">Gain de sous</p>
+					 			<div class="niveau_prix">
+					 				<p id="niv_sous">Niv.1</p>
+					 				<div>
+					 					<p id="prix_bonus_sous">25</p>
+					 					<div id="logo_pièce"></div>
+					 				</div>
+					 			</div>
+					 			<button id="sous">Acheter</button>
+					 		</div>
+					 		<div class="element">
+					 			<p class="element_name">Dégâts par seconde</p>
+					 			<div class="niveau_prix">
+					 				<p id="niv_auto_damage">Niv.1</p>
+					 				<div>
+					 					<p id="prix_bonus_auto_damage">50</p>
+					 					<div id="logo_pièce"></div>
+					 				</div>
+					 			</div>
+					 			<button id="auto_damage">Acheter</button>
+					 		</div>
+					 		<div class="element">
+					 			<p class="element_name">Dégâts critiques</p>
+					 			<div class="niveau_prix" id="max_niv_luck">
+					 				<p id="niv_luck">Niv.1</p>
+					 				<div>
+					 					<p id="prix_bonus_luck">1000</p>
+					 					<div id="logo_pièce"></div>
+					 				</div>
+					 			</div>
+					 			<button id="luck">Acheter</button>
+					 		</div>
+					 	</div> 
+					</div>  
+					<div class="tab">
+					 	<input id="tab-2" name="tab-group-1" type="radio" />
+					 	<label id="label_tab2" for="tab-2"></label> 
+					 	<div class="content"> 
+					 	 	<div class="profil">
+					 	 		<p id="click_profil">Dégats par clique : 1</p> 
+					 	 	</div>
+					 	 	<div class="profil">
+					 			<p id="damage_profil">Dégâts automatique: 0</p>
+					 	 	</div>
+					 	 	<div class="profil">
+					 	 		<p id="chance_critique">Dégâts critiques : 0.0%</p>
+					 	 	</div>
+					 	 	<div class="profil">
+					 	 		<p id="gain_de_sous">Gain de sous : 1</p>
+					 	 	</div>
+					 	 	<div class="profil">
+					 	 		<p id="sous_utilise">Monnaie dépensée : 0</p>
+					 	 		<div id="logo_pièce"></div>
+					 	 	</div>
+					 	</div> 
+					</div>  
+				</div> 
+			</div>
+		</div>
+		<div class="monstre">
+			<p id='point'></p>
+	        <p id='monstre'></p>
+	        <progress id='monster_life'></progress>
+		</div>
+	</article>
+</main>
+	
 </body>
-
-
 </html>
