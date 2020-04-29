@@ -28,10 +28,15 @@ let prix_bonus_sous = 25
 
 
 // ETAT DU BOUTON SI DISPO ACHAT
-etat_bonus_clique()
-etat_bonus_damage_seconde()
-etat_bonus_luck()
-etat_bonus_sous()
+etat_des_sous_disponible()
+
+function etat_des_sous_disponible(){
+
+	etat_bonus_clique()
+	etat_bonus_damage_seconde()
+	etat_bonus_luck()
+	etat_bonus_sous()
+}
 
 function etat_bonus_clique(){
 	$(document).ready(function(){
@@ -166,7 +171,7 @@ $(document).ready(function(){
 	montant_monnaie()
 	// BONUS POUR DEGATS PAR CLIQUE
 	$("body").on("click","#bonus_clique",function(){
-		etat_bonus_clique()
+		etat_des_sous_disponible()
 		if(monnaie-prix_bonus_clique >= 0)
 		{
 			bonus_clique()
@@ -175,7 +180,7 @@ $(document).ready(function(){
 
 	// BONUS POUR DEGATS PAR SECONDES (IDLE)
 	$("body").on("click","#auto_damage",function(){
-		etat_bonus_damage_seconde()
+		etat_des_sous_disponible()
 		if(monnaie-prix_bonus_damage >= 0)
 		{
 			auto_damage()
@@ -183,7 +188,7 @@ $(document).ready(function(){
 	});
 	// BONUS DE CHANCE CRITIQUE
 	$("body").on("click","#luck",function(){		
-		etat_bonus_luck()
+		etat_des_sous_disponible()
 		if(monnaie-prix_bonus_luck >= 0)
 		{
 			bonus_luck()
@@ -191,7 +196,7 @@ $(document).ready(function(){
 	});
 	// BONUS GAIN DE SOUS
 	$("body").on("click","#sous",function(){		
-		etat_bonus_sous()
+		etat_des_sous_disponible()
 		if(monnaie-prix_bonus_sous >= 0)
 		{
 			bonus_sous()
