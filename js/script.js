@@ -29,7 +29,6 @@ let sous = 1
 let niv_sous = 1
 let prix_bonus_sous = 25
 
-
 // ETAT DU BOUTON SI DISPO ACHAT
 etat_des_sous_disponible()
 
@@ -82,6 +81,8 @@ function getRandomInt(max) {
 
 function bonus_clique()
 {
+	user.soustractionPoint(prix_bonus_clique)
+
 	monnaie_depensee = monnaie_depensee + prix_bonus_clique
 	monnaie=monnaie-prix_bonus_clique
 	clickdamage = clickdamage + bonus_clickdamage
@@ -93,10 +94,13 @@ function bonus_clique()
 	$("#prix_bonus_clique").text(prix_bonus_clique)
 	$("#sous_utilise").text("Monnaie dépensée :"+monnaie_depensee)
 	$('#montant').html(monnaie);
+		
 }
 
 function auto_damage()
 {
+	user.soustractionPoint(prix_bonus_damage)
+
 	monnaie_depensee = monnaie_depensee + prix_bonus_damage
 	monnaie=monnaie-prix_bonus_damage
 	damage_seconde = damage_seconde + bonus_damage_seconde
@@ -112,6 +116,8 @@ function auto_damage()
 
 function bonus_sous()
 {
+	user.soustractionPoint(prix_bonus_sous) 
+
 	monnaie_depensee = monnaie_depensee + prix_bonus_sous
 	monnaie=monnaie-prix_bonus_sous
 	sous = sous + sous
@@ -122,10 +128,13 @@ function bonus_sous()
 	$("#prix_bonus_sous").text(prix_bonus_sous)
 	$("#sous_utilise").text("Monnaie dépensée :"+monnaie_depensee)
 	$('#montant').html(monnaie);
+	
 }
 
 function bonus_luck()
 {
+	user.soustractionPoint(prix_bonus_luck) 
+
 	monnaie_depensee = monnaie_depensee + prix_bonus_luck
 	monnaie=monnaie-prix_bonus_luck
 	if(luck > 3)
@@ -210,15 +219,14 @@ $(document).ready(function(){
         monstre.attaque(user.getDegat());
 
 
-		// user.soustractionPoint(monnaie_depensee) 	
 		monnaie=user.setPoint(user.getMonnaie())
+
 
         $('#monster_life').attr("value", monstre.getNewLife());
         $('#montant').html(monnaie);
         if (monstre.getNewLife() <= 0) {
             $('#monster_life').attr("value", monstre.getLife());
             monstre.MajNewLife();
-            $('#point').html(user.setPoint(monstre.getMort()));
             monstre.setnb_mort();
             if (monstre.getnb_mort() % 10 == 0) {
                 monstre.MajLife(2);
@@ -226,10 +234,9 @@ $(document).ready(function(){
                 $('#monster_life').attr("max", monstre.getLife()).attr("value", monstre.getLife());
             }
         }
+
     })
-
     setInterval(function () { dps(user, monstre); }, 1000);
-
 });
 
 
