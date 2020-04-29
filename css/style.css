@@ -115,6 +115,7 @@ color: green;
      .content .profil{
 
       padding: 10px;
+      display: flex;
      }
 
     .content .element button{
