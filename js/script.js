@@ -217,16 +217,15 @@ $(document).ready(function(){
     $('#monstre').click(function () {
     	etat_des_sous_disponible()
         monstre.attaque(user.getDegat());
-
-
-		monnaie=user.setPoint(user.getMonnaie())
-
-
-        $('#monster_life').attr("value", monstre.getNewLife());
+		$('#monster_life').attr("value", monstre.getNewLife());
+		monnaie=user.setPoint(user.getMonnaie());
         $('#montant').html(monnaie);
         if (monstre.getNewLife() <= 0) {
+			console.log(monnaie);
             $('#monster_life').attr("value", monstre.getLife());
-            monstre.MajNewLife();
+			monstre.MajNewLife();
+			monnaie = user.setPoint(monstre.getMort());
+			$('#montant').html(monnaie);
             monstre.setnb_mort();
             if (monstre.getnb_mort() % 10 == 0) {
                 monstre.MajLife(2);
