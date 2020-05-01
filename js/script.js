@@ -1,11 +1,61 @@
-//localStorage.clear();
-const monstre = new Monstre("30");
+// localStorage.clear();
+var monstre = new Monstre("30");
 click = JSON.parse(localStorage.getItem('clicker'));
+bonus_general = JSON.parse(localStorage.getItem('clicker_bonus'));
+
+function stockage_boutique(){
+
+	var bonus = {niveau_clique: niv_bonus_clique, prix_clique: prix_bonus_clique, 
+				niveau_sous: niv_sous, prix_sous: prix_bonus_sous, 
+				niveau_dps: niv_auto_damage, prix_dps: prix_bonus_damage, 
+				niveau_critique: niv_luck, prix_critique: prix_bonus_luck};
+				localStorage.setItem('clicker_bonus', JSON.stringify(bonus));
+}
+
+function stockage_user(){
+
+	var user_donnees = {point: monnaie, degat: clickdamage, dps: damage_seconde , monnaie : sous};
+	localStorage.setItem('clicker', JSON.stringify(user_donnees));
+
+}
+
 if (click !== null) {
+
 	var user = new User(click['point'],click['degat'],click['dps'],click['monnaie']);
+	
 }
 else {
 	var user = new User();
+}
+
+if (bonus_general !== null) {
+	 
+	niv_bonus_clique = bonus_general['niveau_clique']
+	prix_bonus_clique = bonus_general['prix_clique']
+
+	niv_sous = bonus_general['niveau_sous']
+	prix_bonus_sous = bonus_general['prix_sous']
+
+	niv_luck = bonus_general['niveau_critique']
+	prix_bonus_luck = bonus_general['prix_critique']
+
+	niv_auto_damage = bonus_general['niveau_dps']
+	prix_bonus_damage = bonus_general['prix_dps']
+}
+else
+{
+
+	var niv_bonus_clique = 1
+	var prix_bonus_clique = 5
+
+	var niv_sous = 1
+	var prix_bonus_sous = 25
+
+	var niv_luck = 1
+    var prix_bonus_luck = 100
+
+    var niv_auto_damage = 1
+	var prix_bonus_damage = 50
 }
 
 // MIONTANT MONAIE
@@ -15,27 +65,22 @@ let monnaie_depensee = 0
 // BONUS 1 (dommage par clique)
 let clickdamage = user.getDegat()
 let bonus_clickdamage = 2
-let niv_bonus_clique = 1
-let prix_bonus_clique = 5
-let achat_bonus_click = 0
 
 // BONUS 2 (dommage par seconde)
 let damage_seconde = user.getDPS()
 let bonus_damage_seconde = 2
-let niv_auto_damage = 1
-let prix_bonus_damage = 50
 
 // BONUS 3 CHANCE DE CRITIQUE
 let degat_critique = 0
 let luck = 100
 let chance_critique = 0
-let niv_luck = 1
-let prix_bonus_luck = 100
 
 // BONUS 4 GAIN DE SOUS
 let sous = user.getMonnaie()
-let niv_sous = 1
-let prix_bonus_sous = 25
+
+
+// NOMBRE DE MONSTRE
+let nb_monstre = 20
 
 // ETAT DU BOUTON SI DISPO ACHAT
 etat_des_sous_disponible()
@@ -43,6 +88,7 @@ etat_des_sous_disponible()
 function etat_des_sous_disponible() {
 	$(document).ready(function () {
 
+		$("#prix_bonus_clique").html(prix_bonus_clique)
 		if (monnaie - prix_bonus_clique < 0) {
 			$("#bonus_clique").text("Pas disponible")
 		}
@@ -50,6 +96,7 @@ function etat_des_sous_disponible() {
 			$("#bonus_clique").text("Acheter")
 		}
 
+		$("#prix_bonus_sous").html(prix_bonus_sous)
 		if (monnaie - prix_bonus_sous < 0) {
 			$("#sous").text("Pas disponible")
 		}
@@ -57,6 +104,7 @@ function etat_des_sous_disponible() {
 			$("#sous").text("Acheter")
 		}
 
+		$("#prix_bonus_auto_damage").html(prix_bonus_damage)
 		if (monnaie - prix_bonus_damage < 0) {
 			$("#auto_damage").text("Pas disponible")
 		}
@@ -64,6 +112,7 @@ function etat_des_sous_disponible() {
 			$("#auto_damage").text("Acheter")
 		}
 
+		$("#prix_bonus_luck").html(prix_bonus_luck)
 		if (monnaie - prix_bonus_luck < 0) {
 			$("#luck").text("Pas disponible")
 		}
@@ -95,7 +144,7 @@ function bonus_clique() {
 	$("#niv_bonus_clique").text("Niv." + niv_bonus_clique)
 	$("#prix_bonus_clique").text(prix_bonus_clique)
 	$("#sous_utilise").text("Monnaie dépensée :" + monnaie_depensee)
-	$('#montant').html(monnaie);
+	$('#montant').html(monnaie)
 }
 
 function auto_damage() {
@@ -165,15 +214,48 @@ function bonus_luck() {
 
 $(document).ready(function () {
 
+	$("#vie_monstre").text(monstre.getNewLife())
 	$("#montant").html(monnaie)
-	$("#prix_bonus_luck").html(prix_bonus_luck)
 
+	$("#niv_bonus_clique").text("Niv." + niv_bonus_clique)
+	$("#niv_auto_damage").text("Niv." + niv_auto_damage)
+	$("#niv_sous").text("Niv." + niv_sous)
+	$("#niv_luck").text("Niv." + niv_luck)
+
+	// AFFICHER LE RESTE
+
+	nom_image = getRandomInt(nb_monstre)
+	$("#image").remove()
+	$("#image_monstre").append("<img id='image' class='"+nom_image+"' src='img/"+nom_image+".png'>")
+	
+
+	// REJOUER
+	$("body").on("click", "#replay", function () {
+			
+		localStorage.clear();
+		user = new User();
+		clickdamage = user.getDegat()
+		monnaie = user.getPoint()
+		damage_seconde = user.getDPS()
+		sous = user.getMonnaie()
+		monstre = new Monstre("30")
+		$("#vie_monstre").text(monstre.getNewLife())
+
+		$('#monster_life').attr("value", monstre.getLife())
+		$("#montant").html(monnaie)
+		nom_image = getRandomInt(nb_monstre)
+		$("#image").remove()
+		$("#image_monstre").append("<img id='image' class='"+nom_image+"' src='img/"+nom_image+".png'>")
+	
+	});
 	// BONUS POUR DEGATS PAR CLIQUE
 	$("body").on("click", "#bonus_clique", function () {
 		etat_des_sous_disponible()
 		if (monnaie - prix_bonus_clique >= 0) {
-			bonus_clique()
 
+			bonus_clique()
+			stockage_boutique()
+			stockage_user()
 		}
 	});
 
@@ -182,6 +264,8 @@ $(document).ready(function () {
 		etat_des_sous_disponible()
 		if (monnaie - prix_bonus_damage >= 0) {
 			auto_damage()
+			stockage_boutique()
+			stockage_user()
 		}
 	});
 	// BONUS DE CHANCE CRITIQUE
@@ -189,6 +273,8 @@ $(document).ready(function () {
 		etat_des_sous_disponible()
 		if (monnaie - prix_bonus_luck >= 0) {
 			bonus_luck()
+			stockage_boutique()
+			stockage_user()
 		}
 	});
 	// BONUS GAIN DE SOUS
@@ -196,6 +282,8 @@ $(document).ready(function () {
 		etat_des_sous_disponible()
 		if (monnaie - prix_bonus_sous >= 0) {
 			bonus_sous()
+			stockage_boutique()
+			stockage_user()
 		}
 	});
 
@@ -208,18 +296,31 @@ $(document).ready(function () {
 
 	dps(user, monstre);
 
-	$('#monstre').click(function () {
+
+	$("body").on("click", "#image", function () {
+		
 		degat_critique = clickdamage
 		if (getRandomInt(luck) === 1) {
-			console.log('yep');
 			degat_critique = clickdamage * 4
 		}
+
 		etat_des_sous_disponible()
 		monstre.attaque(degat_critique);
 		$('#monster_life').attr("value", monstre.getNewLife());
 		monnaie = user.setPoint(sous);
 		$('#montant').html(monnaie);
 		if (monstre.getNewLife() <= 0) {
+			
+			nom_image = getRandomInt(nb_monstre)
+			let id = document.getElementById('image')
+			while(id.className == nom_image)
+			{
+				nom_image = getRandomInt(nb_monstre)
+			}
+			
+			$("#image").remove()
+			$("#image_monstre").append("<img id='image' class='"+nom_image+"' src='img/"+nom_image+".png'>")
+
 			$('#monster_life').attr("value", monstre.getLife());
 			monstre.MajNewLife();
 			monnaie = user.setPoint(monstre.getMort());
@@ -231,10 +332,12 @@ $(document).ready(function () {
 				$('#monster_life').attr("max", monstre.getLife()).attr("value", monstre.getLife());
 			}
 		}
+		$("#vie_monstre").text(monstre.getNewLife())
 		// localStorage.setItem('clicker', { 'monnaie': monnaie });
-		var user_donnees = { point: monnaie, degat: clickdamage, dps: damage_seconde , monnaie : sous};
-		localStorage.setItem('clicker', JSON.stringify(user_donnees));
-		console.log(localStorage);
+		// var user_donnees = {point: monnaie, degat: clickdamage, dps: damage_seconde , monnaie : sous};
+		// localStorage.setItem('clicker', JSON.stringify(user_donnees));
+		stockage_user()
+		// console.log(localStorage);
 	})
 
 	setInterval(function () { dps(user, monstre); }, 1000);

@@ -232,22 +232,33 @@ color: green;
 
 .monnaie{
 
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.monnaie .mes_sous{
+
   background: rgba(155, 127, 40, 0.38);
   padding: 15px 35px;
-  width: 250px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  width: 250px;
   border-radius: 0px 0px 10px 0px;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.71)
 }
 
-.monnaie div{
+.monnaie .replay button{
 
-  display: flex;
-  justify-content: space-between;
+  border: none;
+  background: rgba(155, 127, 40, 0.38);
   width: 50px;
+  padding: 10px 2px;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.71)
 }
+
 
 .espace_jeu{
 
@@ -256,13 +267,56 @@ color: green;
 
 }
 
-.espace_jeu .monstre{
+@media (max-width: 1050px) {
+  .espace_jeu{
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+  }
+  .monstre{
+
+    margin-top: 200px;
+    margin-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
 }
+
+@media (min-width: 1050px) {
+  .espace_jeu .monstre{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+  }
+}
+
+
+#image_monstre{
+
+  height: 300px;
+  width: 300px;
+
+}
+
+#image_monstre img{
+
+  height: 100%;
+  width: 100%;
+  
+}
+
+#image_monstre:hover{
+
+  cursor: pointer;
+}
+
+
 
 

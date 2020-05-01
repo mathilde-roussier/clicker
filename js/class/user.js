@@ -19,7 +19,6 @@ class User {
     }
 
     getPoint() {
-
         return this.#point;
     }
     soustractionPoint(depense) {

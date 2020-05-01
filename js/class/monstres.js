@@ -10,6 +10,8 @@ class Monstre {
         this.#newLife = this.#life;
         this.#mort = 10;
         this.#nb_mort = 0;
+
+
     }
 
     getLife() {
@@ -23,7 +25,6 @@ class Monstre {
     getNewLife() {
         return this.#newLife;
     }
-
     MajNewLife() {
         this.#newLife = this.#life;
         return this.#newLife;
