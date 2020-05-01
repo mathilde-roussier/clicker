@@ -1,11 +1,19 @@
 //localStorage.clear();
-const monstre = new Monstre("30");
+console.log(localStorage);
+
 click = JSON.parse(localStorage.getItem('clicker'));
-if (click !== null) {
-	var user = new User(click['point'],click['degat'],click['dps'],click['monnaie']);
+monstre = JSON.parse(localStorage.getItem('monstre'));
+boutique = JSON.parse(localStorage.getItem('boutique'));
+
+if (click !== null && monstre !== null && boutique !== null) {
+	var user = new User(click['point'], click['degat'], click['dps'], click['monnaie']);
+	var monstre = new Monstre(monstre['vie'], monstre['nb_mort']);
+	var boutique = new Boutique(boutique['niv_clique'],boutique['prix_clique']);
 }
 else {
 	var user = new User();
+	var monstre = new Monstre();
+	var boutique = new Boutique();
 }
 
 // MIONTANT MONAIE
@@ -15,27 +23,26 @@ let monnaie_depensee = 0
 // BONUS 1 (dommage par clique)
 let clickdamage = user.getDegat()
 let bonus_clickdamage = 2
-let niv_bonus_clique = 1
-let prix_bonus_clique = 5
-let achat_bonus_click = 0
+let niv_bonus_clique = boutique.getNiv_clique();
+let prix_bonus_clique = boutique.getPrix_clique();
 
 // BONUS 2 (dommage par seconde)
 let damage_seconde = user.getDPS()
 let bonus_damage_seconde = 2
-let niv_auto_damage = 1
-let prix_bonus_damage = 50
+let niv_auto_damage = boutique.getNiv_auto_damage();
+let prix_bonus_damage = boutique.getPrix_damage();
 
 // BONUS 3 CHANCE DE CRITIQUE
 let degat_critique = 0
 let luck = 100
 let chance_critique = 0
-let niv_luck = 1
-let prix_bonus_luck = 100
+let niv_luck = boutique.getNiv_luck();
+let prix_bonus_luck = boutique.getPrix_luck();
 
 // BONUS 4 GAIN DE SOUS
 let sous = user.getMonnaie()
-let niv_sous = 1
-let prix_bonus_sous = 25
+let niv_sous = boutique.getNiv_sous();
+let prix_bonus_sous = boutique.getPrix_sous();
 
 // ETAT DU BOUTON SI DISPO ACHAT
 etat_des_sous_disponible()
@@ -78,11 +85,10 @@ function getRandomInt(max) {
 	return Math.floor(Math.random() * Math.floor(max));
 }
 
-
 function bonus_clique() {
 	user.soustractionPoint(prix_bonus_clique)
 	user.setDegat(clickdamage)
-
+	boutique.set
 	monnaie_depensee = monnaie_depensee + prix_bonus_clique
 	monnaie = monnaie - prix_bonus_clique
 
@@ -96,6 +102,9 @@ function bonus_clique() {
 	$("#prix_bonus_clique").text(prix_bonus_clique)
 	$("#sous_utilise").text("Monnaie dépensée :" + monnaie_depensee)
 	$('#montant').html(monnaie);
+	var boutique_donnees = { niv_clique: boutique.getNiv_clique(), prix_clique: boutique.getPrix_clique() };
+	localStorage.setItem('boutique', JSON.stringify(boutique_donnees));
+	console.log(localStorage);
 }
 
 function auto_damage() {
@@ -167,13 +176,14 @@ $(document).ready(function () {
 
 	$("#montant").html(monnaie)
 	$("#prix_bonus_luck").html(prix_bonus_luck)
+	$("#niv_bonus_clique").text("Niv." + niv_bonus_clique)
+	$("#prix_bonus_clique").text(prix_bonus_clique)
 
 	// BONUS POUR DEGATS PAR CLIQUE
 	$("body").on("click", "#bonus_clique", function () {
 		etat_des_sous_disponible()
 		if (monnaie - prix_bonus_clique >= 0) {
 			bonus_clique()
-
 		}
 	});
 
@@ -201,8 +211,7 @@ $(document).ready(function () {
 
 
 	var nam = 'monstre';
-
-	$('#monster_life').attr("max", monstre.getLife()).attr("value", monstre.getLife());
+	$('#monster_life').attr("max", monstre.getLife()).attr("value", monstre.getNewLife());
 
 	$('#monstre').html(nam);
 
@@ -231,9 +240,10 @@ $(document).ready(function () {
 				$('#monster_life').attr("max", monstre.getLife()).attr("value", monstre.getLife());
 			}
 		}
-		// localStorage.setItem('clicker', { 'monnaie': monnaie });
-		var user_donnees = { point: monnaie, degat: clickdamage, dps: damage_seconde , monnaie : sous};
+		var user_donnees = { point: monnaie, degat: clickdamage, dps: damage_seconde, monnaie: sous };
+		var monstre_donnees = { vie: monstre.getLife(), nb_mort: monstre.getnb_mort() };
 		localStorage.setItem('clicker', JSON.stringify(user_donnees));
+		localStorage.setItem('monstre', JSON.stringify(monstre_donnees));
 		console.log(localStorage);
 	})
 
@@ -256,6 +266,9 @@ function dps(user, monstre) {
 		}
 	}
 	monstre.setDpsNewLife(life_actuel, damage_seconde);
-	// user_donnees = { point: monnaie, degat: user.getDegat(), dps: damage_seconde , monnaie : user.getMonnaie()};
+	var user_donnees = { point: monnaie, degat: clickdamage, dps: damage_seconde, monnaie: sous };
+	var monstre_donnees = { vie: monstre.getLife(), nb_mort: monstre.getnb_mort() };
+	localStorage.setItem('clicker', JSON.stringify(user_donnees));
+	localStorage.setItem('monstre', JSON.stringify(monstre_donnees));
 	$('#monster_life').attr('value', monstre.getNewLife());
 }

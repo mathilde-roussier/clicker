@@ -5,11 +5,11 @@ class Monstre {
     #mort;
     #nb_mort;
 
-    constructor(vie) {
+    constructor(vie = 30,nb_mort = 0) {
         this.#life = vie;
         this.#newLife = this.#life;
         this.#mort = 10;
-        this.#nb_mort = 0;
+        this.#nb_mort = nb_mort;
     }
 
     getLife() {
