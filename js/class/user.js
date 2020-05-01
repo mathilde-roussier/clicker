@@ -6,11 +6,11 @@ class User {
     #DPS;
     #monnaie;
 
-    constructor() {
-        this.#point = 0;
-        this.#degat = 1;
-        this.#DPS = 0;
-        this.#monnaie = 1;
+    constructor(point = 0, degat = 1, DPS = 0, monnaie = 1) {
+        this.#point = point;
+        this.#degat = degat;
+        this.#DPS = DPS;
+        this.#monnaie = monnaie;
     }
 
     setPoint(pnt) {
