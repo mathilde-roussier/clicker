@@ -1,6 +1,8 @@
+
 // localStorage.clear();
 var monstre = new Monstre("30");
 click = JSON.parse(localStorage.getItem('clicker'));
+monstre = JSON.parse(localStorage.getItem('monstre'));
 bonus_general = JSON.parse(localStorage.getItem('clicker_bonus'));
 
 function stockage_boutique(){
@@ -19,13 +21,15 @@ function stockage_user(){
 
 }
 
-if (click !== null) {
+if (click !== null && monstre !== null) {
 
 	var user = new User(click['point'],click['degat'],click['dps'],click['monnaie']);
+	var monstre = new Monstre(monstre['vie'], monstre['nb_mort']);
 	
 }
 else {
 	var user = new User();
+	var monstre = new Monstre();
 }
 
 if (bonus_general !== null) {
@@ -66,9 +70,11 @@ let monnaie_depensee = 0
 let clickdamage = user.getDegat()
 let bonus_clickdamage = 2
 
+
 // BONUS 2 (dommage par seconde)
 let damage_seconde = user.getDPS()
 let bonus_damage_seconde = 2
+
 
 // BONUS 3 CHANCE DE CRITIQUE
 let degat_critique = 0
@@ -78,9 +84,12 @@ let chance_critique = 0
 // BONUS 4 GAIN DE SOUS
 let sous = user.getMonnaie()
 
-
 // NOMBRE DE MONSTRE
 let nb_monstre = 20
+
+// BONUS 4 GAIN DE SOUS
+let sous = user.getMonnaie()
+
 
 // ETAT DU BOUTON SI DISPO ACHAT
 etat_des_sous_disponible()
@@ -127,11 +136,10 @@ function getRandomInt(max) {
 	return Math.floor(Math.random() * Math.floor(max));
 }
 
-
 function bonus_clique() {
 	user.soustractionPoint(prix_bonus_clique)
 	user.setDegat(clickdamage)
-
+	boutique.set
 	monnaie_depensee = monnaie_depensee + prix_bonus_clique
 	monnaie = monnaie - prix_bonus_clique
 
@@ -145,6 +153,7 @@ function bonus_clique() {
 	$("#prix_bonus_clique").text(prix_bonus_clique)
 	$("#sous_utilise").text("Monnaie dépensée :" + monnaie_depensee)
 	$('#montant').html(monnaie)
+
 }
 
 function auto_damage() {
@@ -216,7 +225,6 @@ $(document).ready(function () {
 
 	$("#vie_monstre").text(monstre.getNewLife())
 	$("#montant").html(monnaie)
-
 	$("#niv_bonus_clique").text("Niv." + niv_bonus_clique)
 	$("#niv_auto_damage").text("Niv." + niv_auto_damage)
 	$("#niv_sous").text("Niv." + niv_sous)
@@ -263,6 +271,7 @@ $(document).ready(function () {
 	$("body").on("click", "#auto_damage", function () {
 		etat_des_sous_disponible()
 		if (monnaie - prix_bonus_damage >= 0) {
+			
 			auto_damage()
 			stockage_boutique()
 			stockage_user()
@@ -272,6 +281,7 @@ $(document).ready(function () {
 	$("body").on("click", "#luck", function () {
 		etat_des_sous_disponible()
 		if (monnaie - prix_bonus_luck >= 0) {
+			
 			bonus_luck()
 			stockage_boutique()
 			stockage_user()
@@ -281,6 +291,7 @@ $(document).ready(function () {
 	$("body").on("click", "#sous", function () {
 		etat_des_sous_disponible()
 		if (monnaie - prix_bonus_sous >= 0) {
+			
 			bonus_sous()
 			stockage_boutique()
 			stockage_user()
@@ -289,13 +300,11 @@ $(document).ready(function () {
 
 
 	var nam = 'monstre';
-
-	$('#monster_life').attr("max", monstre.getLife()).attr("value", monstre.getLife());
+	$('#monster_life').attr("max", monstre.getLife()).attr("value", monstre.getNewLife());
 
 	$('#monstre').html(nam);
 
 	dps(user, monstre);
-
 
 	$("body").on("click", "#image", function () {
 		
@@ -333,11 +342,10 @@ $(document).ready(function () {
 			}
 		}
 		$("#vie_monstre").text(monstre.getNewLife())
-		// localStorage.setItem('clicker', { 'monnaie': monnaie });
-		// var user_donnees = {point: monnaie, degat: clickdamage, dps: damage_seconde , monnaie : sous};
-		// localStorage.setItem('clicker', JSON.stringify(user_donnees));
+	
 		stockage_user()
-		// console.log(localStorage);
+		var monstre_donnees = { vie: monstre.getLife(), nb_mort: monstre.getnb_mort() };
+		localStorage.setItem('monstre', JSON.stringify(monstre_donnees));
 	})
 
 	setInterval(function () { dps(user, monstre); }, 1000);
@@ -359,6 +367,9 @@ function dps(user, monstre) {
 		}
 	}
 	monstre.setDpsNewLife(life_actuel, damage_seconde);
-	// user_donnees = { point: monnaie, degat: user.getDegat(), dps: damage_seconde , monnaie : user.getMonnaie()};
+	var user_donnees = { point: monnaie, degat: clickdamage, dps: damage_seconde, monnaie: sous };
+	var monstre_donnees = { vie: monstre.getLife(), nb_mort: monstre.getnb_mort() };
+	localStorage.setItem('clicker', JSON.stringify(user_donnees));
+	localStorage.setItem('monstre', JSON.stringify(monstre_donnees));
 	$('#monster_life').attr('value', monstre.getNewLife());
 }
