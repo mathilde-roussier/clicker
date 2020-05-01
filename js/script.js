@@ -10,7 +10,7 @@ function stockage_boutique(){
 	var bonus = {niveau_clique: niv_bonus_clique, prix_clique: prix_bonus_clique, 
 				niveau_sous: niv_sous, prix_sous: prix_bonus_sous, 
 				niveau_dps: niv_auto_damage, prix_dps: prix_bonus_damage, 
-				niveau_critique: niv_luck, prix_critique: prix_bonus_luck};
+				niveau_critique: niv_luck, prix_critique: prix_bonus_luck, monnaie_utilisee: monnaie_depensee};
 				localStorage.setItem('clicker_bonus', JSON.stringify(bonus));
 }
 
@@ -45,6 +45,8 @@ if (bonus_general !== null) {
 
 	niv_auto_damage = bonus_general['niveau_dps']
 	prix_bonus_damage = bonus_general['prix_dps']
+
+	monnaie_depensee = bonus_general['monnaie_utilisee']
 }
 else
 {
@@ -60,11 +62,13 @@ else
 
     var niv_auto_damage = 1
 	var prix_bonus_damage = 50
+
+	var monnaie_depensee = 0
 }
 
 // MIONTANT MONAIE
 let monnaie = user.getPoint()
-let monnaie_depensee = 0
+
 
 // BONUS 1 (dommage par clique)
 let clickdamage = user.getDegat()
@@ -86,9 +90,6 @@ let sous = user.getMonnaie()
 
 // NOMBRE DE MONSTRE
 let nb_monstre = 20
-
-// BONUS 4 GAIN DE SOUS
-let sous = user.getMonnaie()
 
 
 // ETAT DU BOUTON SI DISPO ACHAT
@@ -139,7 +140,7 @@ function getRandomInt(max) {
 function bonus_clique() {
 	user.soustractionPoint(prix_bonus_clique)
 	user.setDegat(clickdamage)
-	boutique.set
+
 	monnaie_depensee = monnaie_depensee + prix_bonus_clique
 	monnaie = monnaie - prix_bonus_clique
 
@@ -229,8 +230,14 @@ $(document).ready(function () {
 	$("#niv_auto_damage").text("Niv." + niv_auto_damage)
 	$("#niv_sous").text("Niv." + niv_sous)
 	$("#niv_luck").text("Niv." + niv_luck)
+	$("#click_damage").text("Dégâts par clique : " + clickdamage)
+	$("#click_profil").text("Dégâts par clique : " + clickdamage)
+	$("#damage_seconde").text("Dégâts par seconde : " + damage_seconde)
+	$("#damage_profil").text("Dégâts par seconde : " + damage_seconde)
+	$("#sous_utilise").text("Monnaie dépensée :" + monnaie_depensee)
+	$("#gain_de_sous").text("Gain de sous : " + sous)
+	$("#chance_critique").text("Dégâts critiques : " + parseInt(chance_critique * 100) + "%")
 
-	// AFFICHER LE RESTE
 
 	nom_image = getRandomInt(nb_monstre)
 	$("#image").remove()
@@ -247,6 +254,17 @@ $(document).ready(function () {
 		damage_seconde = user.getDPS()
 		sous = user.getMonnaie()
 		monstre = new Monstre("30")
+		
+		monnaie_depensee = 0
+		niv_bonus_clique = 1
+		prix_bonus_clique = 5
+		niv_sous = 1
+		prix_bonus_sous = 25
+		niv_luck = 1
+	    prix_bonus_luck = 100
+	    niv_auto_damage = 1
+		prix_bonus_damage = 50
+
 		$("#vie_monstre").text(monstre.getNewLife())
 
 		$('#monster_life').attr("value", monstre.getLife())
@@ -254,6 +272,25 @@ $(document).ready(function () {
 		nom_image = getRandomInt(nb_monstre)
 		$("#image").remove()
 		$("#image_monstre").append("<img id='image' class='"+nom_image+"' src='img/"+nom_image+".png'>")
+
+		$("#vie_monstre").text(monstre.getNewLife())
+		$("#montant").html(monnaie)
+		$("#niv_bonus_clique").text("Niv.1")
+		$("#niv_auto_damage").text("Niv1.")
+		$("#niv_sous").text("Niv1.")
+		$("#niv_luck").text("Niv1.")
+		$("#click_damage").text("Dégâts par clique : 1")
+		$("#click_profil").text("Dégâts par clique : 1")
+		$("#damage_seconde").text("Dégâts par seconde : 0")
+		$("#damage_profil").text("Dégâts par seconde : 0")
+		$("#sous_utilise").text("Monnaie dépensée : 0")
+		$("#gain_de_sous").text("Gain de sous : 1")
+		$("#chance_critique").text("Dégâts critiques : 0%")
+		$("#prix_bonus_luck").text(prix_bonus_luck)
+		$("#prix_bonus_auto_damage").text(prix_bonus_damage)
+		$("#prix_bonus_sous").text(prix_bonus_sous)
+		$("#prix_bonus_clique").text(prix_bonus_clique)
+		etat_des_sous_disponible()
 	
 	});
 	// BONUS POUR DEGATS PAR CLIQUE
@@ -356,6 +393,16 @@ $(document).ready(function () {
 function dps(user, monstre) {
 	var life_actuel = $('#monster_life').attr('value');
 	if (life_actuel <= 0) {
+		nom_image = getRandomInt(nb_monstre)
+			let id = document.getElementById('image')
+			while(id.className == nom_image)
+			{
+				nom_image = getRandomInt(nb_monstre)
+			}
+			
+			$("#image").remove()
+			$("#image_monstre").append("<img id='image' class='"+nom_image+"' src='img/"+nom_image+".png'>")
+
 		life_actuel = monstre.getLife();
 		monstre.setnb_mort();
 		monnaie = user.setPoint(monstre.getMort());
@@ -372,4 +419,7 @@ function dps(user, monstre) {
 	localStorage.setItem('clicker', JSON.stringify(user_donnees));
 	localStorage.setItem('monstre', JSON.stringify(monstre_donnees));
 	$('#monster_life').attr('value', monstre.getNewLife());
+	$("#vie_monstre").text(monstre.getNewLife())
+
+
 }
