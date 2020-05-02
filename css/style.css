@@ -377,3 +377,12 @@ button:hover{
     80% { opacity: 0}
     100% { opacity: 0}
 }
+
+
+#niveau{
+
+  font-size: 30px;
+  color: white;
+  font-weight: bold;
+  text-shadow: black 0.1em 0.1em 0.2em
+}

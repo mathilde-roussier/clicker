@@ -98,6 +98,7 @@ let sous = user.getMonnaie()
 
 // NOMBRE DE MONSTRE
 let nb_monstre = 25
+let niv = 1
 
 // ETAT DU BOUTON SI DISPO ACHAT
 etat_des_sous_disponible()
@@ -398,7 +399,8 @@ $(document).ready(function () {
 				monstre.MajLife(2);
 				monstre.MajNewLife();
 				$('#monster_life').attr("max", monstre.getLife()).attr("value", monstre.getLife());
-				$('#niveau').text('Lvl.'+monstre.getNiveau() + 1);
+				niv =monstre.getNiveau() + parseInt(niv)
+				$('#niveau').text('Lvl.'+ niv);
 			}
 		}
 		$("#vie_monstre").text(monstre.getNewLife())
