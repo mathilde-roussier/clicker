@@ -4,6 +4,7 @@ class Monstre {
     #newLife;
     #mort;
     #nb_mort;
+    #niveau;
 
     constructor(vie = 30,nb_mort = 0) {
         this.#life = vie;
@@ -11,6 +12,7 @@ class Monstre {
         this.#mort = 10;
         this.#nb_mort = 0;
         this.#nb_mort = nb_mort;
+        this.#niveau = 1;
     }
 
     getLife() {
@@ -46,5 +48,9 @@ class Monstre {
     }
     getnb_mort() {
         return this.#nb_mort;
+    }
+
+    getNiveau() {
+        return this.#niveau;
     }
 }

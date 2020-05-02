@@ -1,4 +1,3 @@
-
 // localStorage.clear();
 var monstre = new Monstre("30");
 click = JSON.parse(localStorage.getItem('clicker'));
@@ -359,6 +358,7 @@ $(document).ready(function () {
 	var nam = 'monstre';
 	$('#monster_life').attr("max", monstre.getLife()).attr("value", monstre.getNewLife());
 
+	$('#niveau').text('Lvl.'+monstre.getNiveau());
 	$('#monstre').html(nam);
 
 	dps(user, monstre);
@@ -398,6 +398,7 @@ $(document).ready(function () {
 				monstre.MajLife(2);
 				monstre.MajNewLife();
 				$('#monster_life').attr("max", monstre.getLife()).attr("value", monstre.getLife());
+				$('#niveau').text('Lvl.'+monstre.getNiveau() + 1);
 			}
 		}
 		$("#vie_monstre").text(monstre.getNewLife())
@@ -431,6 +432,7 @@ function dps(user, monstre) {
 			monstre.MajLife(2);
 			life_actuel = monstre.MajNewLife();
 			$('#monster_life').attr("max", monstre.getLife()).attr("value", monstre.getLife());
+			$('#niveau').text('Lvl.'+monstre.getNiveau() + 1);
 		}
 	}
 	monstre.setDpsNewLife(life_actuel, damage_seconde);
