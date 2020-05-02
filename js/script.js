@@ -5,25 +5,27 @@ click = JSON.parse(localStorage.getItem('clicker'));
 monstre = JSON.parse(localStorage.getItem('monstre'));
 bonus_general = JSON.parse(localStorage.getItem('clicker_bonus'));
 
-function stockage_boutique(){
+function stockage_boutique() {
 
-	var bonus = {niveau_clique: niv_bonus_clique, prix_clique: prix_bonus_clique, 
-				niveau_sous: niv_sous, prix_sous: prix_bonus_sous, 
-				niveau_dps: niv_auto_damage, prix_dps: prix_bonus_damage, 
-				niveau_critique: niv_luck, prix_critique: prix_bonus_luck, monnaie_utilisee: monnaie_depensee};
-				localStorage.setItem('clicker_bonus', JSON.stringify(bonus));
+	var bonus = {
+		niveau_clique: niv_bonus_clique, prix_clique: prix_bonus_clique,
+		niveau_sous: niv_sous, prix_sous: prix_bonus_sous,
+		niveau_dps: niv_auto_damage, prix_dps: prix_bonus_damage,
+		niveau_critique: niv_luck, prix_critique: prix_bonus_luck, monnaie_utilisee: monnaie_depensee
+	};
+	localStorage.setItem('clicker_bonus', JSON.stringify(bonus));
 }
 
-function stockage_user(){
+function stockage_user() {
 
-	var user_donnees = {point: monnaie, degat: clickdamage, dps: damage_seconde , monnaie : sous};
+	var user_donnees = { point: monnaie, degat: clickdamage, dps: damage_seconde, monnaie: sous };
 	localStorage.setItem('clicker', JSON.stringify(user_donnees));
 
 }
 
-function stockage_monstre(){
+function stockage_monstre() {
 
-	var monstre_donnees = {vie: monstre.getLife(), nb_mort: monstre.getnb_mort(), image: nom_image};
+	var monstre_donnees = { vie: monstre.getLife(), nb_mort: monstre.getnb_mort(), image: nom_image };
 	localStorage.setItem('monstre', JSON.stringify(monstre_donnees));
 
 }
@@ -31,7 +33,7 @@ function stockage_monstre(){
 if (click !== null && monstre !== null) {
 
 	var nom_image = monstre['image']
-	var user = new User(click['point'],click['degat'],click['dps'],click['monnaie']);
+	var user = new User(click['point'], click['degat'], click['dps'], click['monnaie']);
 	var monstre = new Monstre(monstre['vie'], monstre['nb_mort']);
 }
 else {
@@ -41,7 +43,7 @@ else {
 }
 
 if (bonus_general !== null) {
-	 
+
 	niv_bonus_clique = bonus_general['niveau_clique']
 	prix_bonus_clique = bonus_general['prix_clique']
 
@@ -56,8 +58,7 @@ if (bonus_general !== null) {
 
 	monnaie_depensee = bonus_general['monnaie_utilisee']
 }
-else
-{
+else {
 
 	var niv_bonus_clique = 1
 	var prix_bonus_clique = 5
@@ -66,9 +67,9 @@ else
 	var prix_bonus_sous = 25
 
 	var niv_luck = 1
-    var prix_bonus_luck = 100
+	var prix_bonus_luck = 100
 
-    var niv_auto_damage = 1
+	var niv_auto_damage = 1
 	var prix_bonus_damage = 50
 
 	var monnaie_depensee = 0
@@ -250,22 +251,21 @@ $(document).ready(function () {
 
 
 
-if(monstre !== null) {
+	if (monstre !== null) {
 
-	$("#image").remove()
-	$("#image_monstre").append("<img id='image' class='"+nom_image+"' src='img/"+nom_image+".png'>")
-}
-else
-{
-	$("#image").remove()
-	$("#image_monstre").append("<img id='image' class='"+nom_image+"' src='img/"+nom_image+".png'>")
-	stockage_monstre()
-	
-	
-}
+		$("#image").remove()
+		$("#image_monstre").append("<img id='image' class='" + nom_image + "' src='img/" + nom_image + ".png'>")
+	}
+	else {
+		$("#image").remove()
+		$("#image_monstre").append("<img id='image' class='" + nom_image + "' src='img/" + nom_image + ".png'>")
+		stockage_monstre()
+
+
+	}
 	// REJOUER
 	$("body").on("click", "#replay", function () {
-			
+
 		localStorage.clear();
 		user = new User();
 		clickdamage = user.getDegat()
@@ -275,15 +275,15 @@ else
 		monstre = new Monstre("30")
 		$('#monster_life').attr("max", monstre.getLife()).attr("value", monstre.getLife());
 		$('#monster_life').attr("value", monstre.getLife());
-		
+
 		monnaie_depensee = 0
 		niv_bonus_clique = 1
 		prix_bonus_clique = 5
 		niv_sous = 1
 		prix_bonus_sous = 25
 		niv_luck = 1
-	    prix_bonus_luck = 100
-	    niv_auto_damage = 1
+		prix_bonus_luck = 100
+		niv_auto_damage = 1
 		prix_bonus_damage = 50
 		nom_image = 0
 
@@ -292,7 +292,7 @@ else
 		$('#monster_life').attr("value", monstre.getLife())
 		$("#montant").html(monnaie)
 		$("#image").remove()
-		$("#image_monstre").append("<img id='image' class='"+nom_image+"' src='img/"+nom_image+".png'>")
+		$("#image_monstre").append("<img id='image' class='" + nom_image + "' src='img/" + nom_image + ".png'>")
 
 		$("#vie_monstre").text(monstre.getNewLife())
 		$("#montant").html(monnaie)
@@ -312,7 +312,7 @@ else
 		$("#prix_bonus_sous").text(prix_bonus_sous)
 		$("#prix_bonus_clique").text(prix_bonus_clique)
 		etat_des_sous_disponible()
-	
+
 	});
 	// BONUS POUR DEGATS PAR CLIQUE
 	$("body").on("click", "#bonus_clique", function () {
@@ -329,7 +329,7 @@ else
 	$("body").on("click", "#auto_damage", function () {
 		etat_des_sous_disponible()
 		if (monnaie - prix_bonus_damage >= 0) {
-			
+
 			auto_damage()
 			stockage_boutique()
 			stockage_user()
@@ -339,7 +339,7 @@ else
 	$("body").on("click", "#luck", function () {
 		etat_des_sous_disponible()
 		if (monnaie - prix_bonus_luck >= 0) {
-			
+
 			bonus_luck()
 			stockage_boutique()
 			stockage_user()
@@ -349,7 +349,7 @@ else
 	$("body").on("click", "#sous", function () {
 		etat_des_sous_disponible()
 		if (monnaie - prix_bonus_sous >= 0) {
-			
+
 			bonus_sous()
 			stockage_boutique()
 			stockage_user()
@@ -365,7 +365,7 @@ else
 	dps(user, monstre);
 
 	$("body").on("click", "#image", function () {
-		
+
 		degat_critique = clickdamage
 		if (getRandomInt(luck) === 1) {
 			degat_critique = clickdamage * 4
@@ -377,16 +377,15 @@ else
 		monnaie = user.setPoint(sous);
 		$('#montant').html(monnaie);
 		if (monstre.getNewLife() <= 0) {
-			
+
 			nom_image = getRandomInt(nb_monstre)
 			let id = document.getElementById('image')
-			while(id.className == nom_image)
-			{
+			while (id.className == nom_image) {
 				nom_image = getRandomInt(nb_monstre)
 			}
-			
+
 			$("#image").remove()
-			$("#image_monstre").append("<img id='image' class='"+nom_image+"' src='img/"+nom_image+".png'>")
+			$("#image_monstre").append("<img id='image' class='" + nom_image + "' src='img/" + nom_image + ".png'>")
 			$('#monster_life').attr("value", monstre.getLife());
 			monstre.MajNewLife();
 			monnaie = user.setPoint(monstre.getMort());
@@ -399,7 +398,7 @@ else
 			}
 		}
 		$("#vie_monstre").text(monstre.getNewLife())
-		
+
 		stockage_user()
 		stockage_monstre()
 	})
@@ -413,14 +412,13 @@ function dps(user, monstre) {
 	var life_actuel = $('#monster_life').attr('value');
 	if (life_actuel <= 0) {
 		nom_image = getRandomInt(nb_monstre)
-			let id = document.getElementById('image')
-			while(id.className == nom_image)
-			{
-				nom_image = getRandomInt(nb_monstre)
-			}
-			
-			$("#image").remove()
-			$("#image_monstre").append("<img id='image' class='"+nom_image+"' src='img/"+nom_image+".png'>")
+		let id = document.getElementById('image')
+		while (id.className == nom_image) {
+			nom_image = getRandomInt(nb_monstre)
+		}
+
+		$("#image").remove()
+		$("#image_monstre").append("<img id='image' class='" + nom_image + "' src='img/" + nom_image + ".png'>")
 
 		life_actuel = monstre.getLife();
 		monstre.setnb_mort();
@@ -436,7 +434,12 @@ function dps(user, monstre) {
 	stockage_user()
 	stockage_monstre()
 	$('#monster_life').attr('value', monstre.getNewLife());
-	$("#vie_monstre").text(monstre.getNewLife())
+	if (monstre.getNewLife() <= 0) {
+		$("#vie_monstre").text(0)
+	}
+	else {
+		$("#vie_monstre").text(monstre.getNewLife())
+	}
 
 
 }
