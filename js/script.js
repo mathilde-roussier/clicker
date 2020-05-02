@@ -10,7 +10,7 @@ function stockage_boutique() {
 		niveau_clique: niv_bonus_clique, prix_clique: prix_bonus_clique,
 		niveau_sous: niv_sous, prix_sous: prix_bonus_sous,
 		niveau_dps: niv_auto_damage, prix_dps: prix_bonus_damage,
-		niveau_critique: niv_luck, prix_critique: prix_bonus_luck, monnaie_utilisee: monnaie_depensee
+		niveau_critique: niv_luck, prix_critique: prix_bonus_luck, monnaie_utilisee: monnaie_depensee, luck: luck
 	};
 	localStorage.setItem('clicker_bonus', JSON.stringify(bonus));
 }
@@ -56,6 +56,8 @@ if (bonus_general !== null) {
 	prix_bonus_damage = bonus_general['prix_dps']
 
 	monnaie_depensee = bonus_general['monnaie_utilisee']
+
+	luck =  bonus_general['luck']
 }
 else {
 
@@ -72,11 +74,12 @@ else {
 	var prix_bonus_damage = 50
 
 	var monnaie_depensee = 0
+
+	var luck = 100
 }
 
 // MIONTANT MONAIE
 let monnaie = user.getPoint()
-
 
 // BONUS 1 (dommage par clique)
 let clickdamage = user.getDegat()
@@ -90,7 +93,6 @@ let bonus_damage_seconde = 2
 
 // BONUS 3 CHANCE DE CRITIQUE
 let degat_critique = 0
-let luck = 100
 let chance_critique = 0
 
 // BONUS 4 GAIN DE SOUS
@@ -223,7 +225,7 @@ function bonus_luck() {
 		$("#luck").remove()
 		$("#max_niv_luck").after("<div id='niveau_max'><p>Max</p></div>")
 	}
-
+	stockage_boutique()
 	$("#sous_utilise").text("Monnaie dépensée :" + monnaie_depensee)
 	$('#montant').html(monnaie);
 }
@@ -244,7 +246,7 @@ $(document).ready(function () {
 	$("#damage_profil").text("Dégâts par seconde : " + damage_seconde)
 	$("#sous_utilise").text("Monnaie dépensée :" + monnaie_depensee)
 	$("#gain_de_sous").text("Gain de sous : " + sous)
-	$("#chance_critique").text("Dégâts critiques : " + parseInt(chance_critique * 100) + "%")
+	$("#chance_critique").text("Dégâts critiques : " + parseInt((1/luck) * 100) + "%")
 
 
 
@@ -304,7 +306,7 @@ $(document).ready(function () {
 		$("#damage_profil").text("Dégâts par seconde : 0")
 		$("#sous_utilise").text("Monnaie dépensée : 0")
 		$("#gain_de_sous").text("Gain de sous : 1")
-		$("#chance_critique").text("Dégâts critiques : 0%")
+		$("#chance_critique").text("Dégâts critiques : 1%")
 		$("#prix_bonus_luck").text(prix_bonus_luck)
 		$("#prix_bonus_auto_damage").text(prix_bonus_damage)
 		$("#prix_bonus_sous").text(prix_bonus_sous)
