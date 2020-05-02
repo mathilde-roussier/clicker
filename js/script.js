@@ -21,15 +21,23 @@ function stockage_user(){
 
 }
 
+function stockage_monstre(){
+
+	var monstre_donnees = {vie: monstre.getLife(), nb_mort: monstre.getnb_mort(), image: nom_image};
+	localStorage.setItem('monstre', JSON.stringify(monstre_donnees));
+
+}
+
 if (click !== null && monstre !== null) {
 
+	var nom_image = monstre['image']
 	var user = new User(click['point'],click['degat'],click['dps'],click['monnaie']);
 	var monstre = new Monstre(monstre['vie'], monstre['nb_mort']);
-	
 }
 else {
 	var user = new User();
 	var monstre = new Monstre();
+	var nom_image = 0
 }
 
 if (bonus_general !== null) {
@@ -90,6 +98,7 @@ let sous = user.getMonnaie()
 
 // NOMBRE DE MONSTRE
 let nb_monstre = 20
+
 
 
 // ETAT DU BOUTON SI DISPO ACHAT
@@ -239,11 +248,21 @@ $(document).ready(function () {
 	$("#chance_critique").text("Dégâts critiques : " + parseInt(chance_critique * 100) + "%")
 
 
-	nom_image = getRandomInt(nb_monstre)
+
+
+if(monstre !== null) {
+
 	$("#image").remove()
 	$("#image_monstre").append("<img id='image' class='"+nom_image+"' src='img/"+nom_image+".png'>")
+}
+else
+{
+	$("#image").remove()
+	$("#image_monstre").append("<img id='image' class='"+nom_image+"' src='img/"+nom_image+".png'>")
+	stockage_monstre()
 	
-
+	
+}
 	// REJOUER
 	$("body").on("click", "#replay", function () {
 			
@@ -254,6 +273,8 @@ $(document).ready(function () {
 		damage_seconde = user.getDPS()
 		sous = user.getMonnaie()
 		monstre = new Monstre("30")
+		$('#monster_life').attr("max", monstre.getLife()).attr("value", monstre.getLife());
+		$('#monster_life').attr("value", monstre.getLife());
 		
 		monnaie_depensee = 0
 		niv_bonus_clique = 1
@@ -264,12 +285,12 @@ $(document).ready(function () {
 	    prix_bonus_luck = 100
 	    niv_auto_damage = 1
 		prix_bonus_damage = 50
+		nom_image = 0
 
 		$("#vie_monstre").text(monstre.getNewLife())
 
 		$('#monster_life').attr("value", monstre.getLife())
 		$("#montant").html(monnaie)
-		nom_image = getRandomInt(nb_monstre)
 		$("#image").remove()
 		$("#image_monstre").append("<img id='image' class='"+nom_image+"' src='img/"+nom_image+".png'>")
 
@@ -366,7 +387,6 @@ $(document).ready(function () {
 			
 			$("#image").remove()
 			$("#image_monstre").append("<img id='image' class='"+nom_image+"' src='img/"+nom_image+".png'>")
-
 			$('#monster_life').attr("value", monstre.getLife());
 			monstre.MajNewLife();
 			monnaie = user.setPoint(monstre.getMort());
@@ -379,10 +399,9 @@ $(document).ready(function () {
 			}
 		}
 		$("#vie_monstre").text(monstre.getNewLife())
-	
+		
 		stockage_user()
-		var monstre_donnees = { vie: monstre.getLife(), nb_mort: monstre.getnb_mort() };
-		localStorage.setItem('monstre', JSON.stringify(monstre_donnees));
+		stockage_monstre()
 	})
 
 	setInterval(function () { dps(user, monstre); }, 1000);
@@ -414,10 +433,8 @@ function dps(user, monstre) {
 		}
 	}
 	monstre.setDpsNewLife(life_actuel, damage_seconde);
-	var user_donnees = { point: monnaie, degat: clickdamage, dps: damage_seconde, monnaie: sous };
-	var monstre_donnees = { vie: monstre.getLife(), nb_mort: monstre.getnb_mort() };
-	localStorage.setItem('clicker', JSON.stringify(user_donnees));
-	localStorage.setItem('monstre', JSON.stringify(monstre_donnees));
+	stockage_user()
+	stockage_monstre()
 	$('#monster_life').attr('value', monstre.getNewLife());
 	$("#vie_monstre").text(monstre.getNewLife())
 

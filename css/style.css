@@ -4,6 +4,13 @@
   outline: none; 
 }
 
+body{
+
+  background-image: url(../img/fond.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
 button:hover{
 
   cursor: pointer;
@@ -16,17 +23,6 @@ button:hover{
   width: 40%;
 	}
 	
-#menu-tab a {
-color: grey;
-font-weight: normal;
-font-style: normal;
-text-decoration: none;
-font-variant: normal;
-}
-#menu-tab a:hover{
-color: green;
-
-}
 	
 /*--------------Dimensions tableau--------------*/
 
@@ -50,7 +46,7 @@ color: green;
  
     }
     .tab label {
-      background: rgba(155, 127, 40, 0.38);
+      background: rgba(73, 133, 145, 0.58);
       padding: 15px 35px; 
       border: 1px solid #ccc; 
       margin-left: -1px; 
@@ -71,7 +67,7 @@ color: green;
       position: absolute;
       top: 28px;
       left: 0;
-      background: white;
+      background: #CAEBF2;
       right: 0;
       bottom: 0;
       padding: 20px;
@@ -120,7 +116,7 @@ color: green;
 
     .content .element button{
 
-      background-color:rgba(155, 127, 40, 0.38);
+      background-color:rgba(73, 133, 145, 0.58);
       border: none;
       border-radius: 5px;
       padding: 8px 15px;
@@ -130,7 +126,7 @@ color: green;
 
 
     .content #niveau_max{
-       background-color:rgba(155, 127, 40, 0.38);
+      background-color:rgba(73, 133, 145, 0.58);
       border: none;
       border-radius: 5px;
       padding: 8px 15px;
@@ -141,7 +137,7 @@ color: green;
 
     .content div button:hover{
 
-      background-color:rgba(161, 149, 112);
+      background-color:rgba(43, 105, 117);
     }
 
     .content .element .niveau_prix{
@@ -241,7 +237,7 @@ color: green;
 
 .monnaie .mes_sous{
 
-  background: rgba(155, 127, 40, 0.38);
+  background: rgba(73, 133, 145, 0.58);
   padding: 15px 35px;
   display: flex;
   justify-content: center;
@@ -253,10 +249,18 @@ color: green;
 .monnaie .replay button{
 
   border: none;
-  background: rgba(155, 127, 40, 0.38);
-  width: 50px;
+  background: rgba(73, 133, 145, 0.58);
+  width: 60px;
   padding: 10px 2px;
-  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.71)
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.71);
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+.monnaie .replay button:hover{
+
+  cursor: pointer;
+  background-color:rgba(43, 105, 117);
 }
 
 
@@ -300,16 +304,16 @@ color: green;
 
 #image_monstre{
 
-  height: 300px;
-  width: 300px;
+  height: 350px;
+  width: 350px;
+  border-radius: 10%;
 
 }
 
 #image_monstre img{
 
   height: 100%;
-  width: 100%;
-  
+  width: 100%; 
 }
 
 #image_monstre:hover{
@@ -317,6 +321,13 @@ color: green;
   cursor: pointer;
 }
 
+#vie_monstre{
+
+  font-size: 25px;
+  color: white;
+  font-weight: bold;
+  text-shadow: black 0.1em 0.1em 0.2em
+}
 
 
 
