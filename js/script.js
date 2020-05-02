@@ -98,9 +98,7 @@ let chance_critique = 0
 let sous = user.getMonnaie()
 
 // NOMBRE DE MONSTRE
-let nb_monstre = 20
-
-
+let nb_monstre = 25
 
 // ETAT DU BOUTON SI DISPO ACHAT
 etat_des_sous_disponible()
@@ -234,6 +232,7 @@ function bonus_luck() {
 
 $(document).ready(function () {
 
+
 	$("#vie_monstre").text(monstre.getNewLife())
 	$("#montant").html(monnaie)
 	$("#niv_bonus_clique").text("Niv." + niv_bonus_clique)
@@ -366,9 +365,13 @@ $(document).ready(function () {
 
 	$("body").on("click", "#image", function () {
 
+		
 		degat_critique = clickdamage
 		if (getRandomInt(luck) === 1) {
-			degat_critique = clickdamage * 4
+			degat_critique = clickdamage * 4	
+			$("#fly-in").remove()
+			$("#vie_monstre").after("<div id='fly-in'></div")
+			$("#fly-in").append("<div>Critique !</div>")
 		}
 
 		etat_des_sous_disponible()
@@ -443,3 +446,4 @@ function dps(user, monstre) {
 
 
 }
+

@@ -288,6 +288,14 @@ button:hover{
     align-items: center;
     width: 100%;
   }
+  @keyframes switch {
+    0% { opacity: 0;filter: blur(20px); transform:scale(2)}
+    3% { opacity: 1;filter: blur(0); transform:scale(1)}
+    10% { opacity: 1;filter: blur(0); transform:scale(.9)}
+    13% { opacity: 0;filter: blur(10px); transform:scale(.1)}
+    80% { opacity: 0}
+    100% { opacity: 0}
+}
 }
 
 @media (min-width: 1050px) {
@@ -329,5 +337,43 @@ button:hover{
   text-shadow: black 0.1em 0.1em 0.2em
 }
 
+#critique{
+
+  font-size: 30px;
+  color: #F7BF12;
+  font-weight: bold;
+  text-shadow: 3px 3px 5px #000000;
+  position:absolute;
+}
+
+#fly-in {
+  text-transform: uppercase;
+  position: absolute;
+  margin-top: 220px;
+}
+
+#fly-in span {
+  display: block;
+  opacity: .8;
+}
+
+#fly-in div {
+  opacity: 0;
+  animation: switch 10s linear;
+  font-size: 25px;
+  text-shadow: 3px 3px 5px #000000;
+  color: #F7BF12;
+  font-weight: bold;
+}
+
+#fly-in div:nth-child(2) { animation-delay: 1s}
 
 
+@keyframes switch {
+    0% { opacity: 0;filter: blur(20px); transform:scale(5)}
+    3% { opacity: 1;filter: blur(0); transform:scale(1)}
+    10% { opacity: 1;filter: blur(0); transform:scale(.9)}
+    13% { opacity: 0;filter: blur(10px); transform:scale(.1)}
+    80% { opacity: 0}
+    100% { opacity: 0}
+}
