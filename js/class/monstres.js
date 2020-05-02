@@ -53,4 +53,8 @@ class Monstre {
     getNiveau() {
         return this.#niveau;
     }
+    setNiveau() {
+       this.#niveau = this.#niveau + 1;
+       // return this.#niveau
+    }
 }
