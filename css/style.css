@@ -411,21 +411,40 @@ button:hover {
 /*** BARRE DE PROGRESSION ***/
 
 #monster_life[value] {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 250px;
-  height: 20px;
-  border:2px solid black;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+  width: 200px;
 }
 
-#monster_life[value]::-webkit-progress-bar {
-  background-color: #eee;
-  border-radius: 2px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+.green[value]::-webkit-progress-value {
+  height: 16px;
+  width: 200px;
+  border-radius: 4px;
+  -webkit-transition: 0.4s linear;
+  -moz-transition: 0.4s linear;
+  -o-transition: 0.4s linear;
+  transition: 0.4s linear;
+  background-color: #80D56B;
 }
 
-#monster_life[value]::-webkit-progress-value {
-  background-image: -webkit-linear-gradient(-45deg, transparent 33%, rgba(0, 0, 0, .1) 33%, rgba(0, 0, 0, .1) 66%, transparent 66%), -webkit-linear-gradient(top, rgba(255, 255, 255, .25), rgba(0, 0, 0, .25)), -webkit-linear-gradient(left, #f44, rgb(68, 255, 77));
-  border-radius: 2px;
-  background-size: 35px 20px, 100% 100%, 100% 100%;
+.yellow[value]::-webkit-progress-value {
+  height: 16px;
+  border-radius: 4px;
+  -webkit-transition: 0.4s linear;
+  -moz-transition: 0.4s linear;
+  -o-transition: 0.4s linear;
+  transition: 0.4s linear;
+  background-color: #F7DC6F ;
 }
+
+.red[value]::-webkit-progress-value {
+  height: 16px;
+  border-radius: 4px;
+  -webkit-transition: 0.4s linear;
+  -moz-transition: 0.4s linear;
+  -o-transition: 0.4s linear;
+  transition: 0.4s linear;
+  background-color: #E74C3C;
+}
+
+

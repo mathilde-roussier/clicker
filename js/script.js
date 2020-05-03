@@ -398,7 +398,19 @@ $(document).ready(function () {
 			}
 		}
 		$("#vie_monstre").text(monstre.getNewLife())
-
+		if(monstre.getNewLife() <= monstre.getLife() / 2 && monstre.getNewLife() > monstre.getLife() / 4 )
+		{	
+			document.getElementById("monster_life").className = "yellow";
+			
+		}
+		else if(monstre.getNewLife() <= monstre.getLife() / 4)
+		{
+			document.getElementById("monster_life").className = "red";
+		}
+		else
+		{
+			document.getElementById("monster_life").className = "green";
+		}
 		stockage_user()
 		stockage_monstre()
 	})
@@ -444,5 +456,18 @@ function dps(user, monstre) {
 	else {
 		$("#vie_monstre").text(monstre.getNewLife())
 	}
+	if(monstre.getNewLife() <= monstre.getLife() / 2 && monstre.getNewLife() > monstre.getLife() / 4 )
+		{	
+			document.getElementById("monster_life").className = "yellow";
+			
+		}
+		else if(monstre.getNewLife() <= monstre.getLife() / 4)
+		{
+			document.getElementById("monster_life").className = "red";
+		}
+		else
+		{
+			document.getElementById("monster_life").className = "green";
+		}
 }
 
