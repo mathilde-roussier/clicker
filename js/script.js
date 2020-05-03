@@ -436,6 +436,17 @@ $(document).ready(function () {
 function dps(user, monstre) {
 	var life_actuel = $('#monster_life').attr('value');
 	if (life_actuel <= 0) {
+		if(monstre.getnb_mort() == 8)
+		{
+			monstre.MajLife(4)
+			monstre. MajNewLife()
+			$('#monster_life').attr("max", monstre.getLife()).attr("value", monstre.getLife());
+		}
+		else if(monstre.getnb_mort() == 9)
+		{
+			monstre.MajLife(0.25)
+			monstre. MajNewLife()
+		}
 		nom_image = getRandomInt(nb_monstre)
 		let id = document.getElementById('image')
 		while (id.className == nom_image) {
