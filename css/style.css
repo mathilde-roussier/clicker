@@ -402,8 +402,49 @@ button:hover {
   text-shadow: white 0.1em 0.1em 0.2em
 }
 
-.mort{
-  display:flex;
+.mort {
+  display: flex;
   flex-direction: row;
   align-items: center;
 }
+
+/*** BARRE DE PROGRESSION ***/
+
+#monster_life[value] {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+  width: 200px;
+}
+
+.green[value]::-webkit-progress-value {
+  height: 16px;
+  width: 200px;
+  border-radius: 4px;
+  -webkit-transition: 0.4s linear;
+  -moz-transition: 0.4s linear;
+  -o-transition: 0.4s linear;
+  transition: 0.4s linear;
+  background-color: #80D56B;
+}
+
+.yellow[value]::-webkit-progress-value {
+  height: 16px;
+  border-radius: 4px;
+  -webkit-transition: 0.4s linear;
+  -moz-transition: 0.4s linear;
+  -o-transition: 0.4s linear;
+  transition: 0.4s linear;
+  background-color: #F7DC6F ;
+}
+
+.red[value]::-webkit-progress-value {
+  height: 16px;
+  border-radius: 4px;
+  -webkit-transition: 0.4s linear;
+  -moz-transition: 0.4s linear;
+  -o-transition: 0.4s linear;
+  transition: 0.4s linear;
+  background-color: #E74C3C;
+}
+
+
