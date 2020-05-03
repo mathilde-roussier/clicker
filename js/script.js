@@ -98,7 +98,6 @@ let sous = user.getMonnaie()
 
 // NOMBRE DE MONSTRE
 let nb_monstre = 25
-
 // ETAT DU BOUTON SI DISPO ACHAT
 etat_des_sous_disponible()
 
@@ -230,7 +229,7 @@ function bonus_luck() {
 
 
 $(document).ready(function () {
-
+		
 	$("#vie_monstre").text(monstre.getNewLife())
 	$("#montant").html(monnaie)
 	$("#niv_bonus_clique").text("Niv." + niv_bonus_clique)
@@ -374,6 +373,18 @@ $(document).ready(function () {
 		monnaie = user.setPoint(sous);
 		$('#montant').html(monnaie);
 		if (monstre.getNewLife() <= 0) {
+
+			if(monstre.getnb_mort() == 8)
+			{
+				monstre.MajLife(4)
+				monstre. MajNewLife()
+				$('#monster_life').attr("max", monstre.getLife()).attr("value", monstre.getLife());
+			}
+			else if(monstre.getnb_mort() == 9)
+			{
+				monstre.MajLife(0.25)
+				monstre. MajNewLife()
+			}
 			nom_image = getRandomInt(nb_monstre)
 			let id = document.getElementById('image')
 			while (id.className == nom_image) {
@@ -413,7 +424,9 @@ $(document).ready(function () {
 		}
 		stockage_user()
 		stockage_monstre()
+
 	})
+
 
 	setInterval(function () { dps(user, monstre); }, 1000);
 });
