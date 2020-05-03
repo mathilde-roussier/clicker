@@ -435,6 +435,7 @@ $(document).ready(function () {
 
 function dps(user, monstre) {
 	var life_actuel = $('#monster_life').attr('value');
+	etat_des_sous_disponible()
 	if (life_actuel <= 0) {
 		if(monstre.getnb_mort() == 8)
 		{
