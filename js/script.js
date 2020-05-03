@@ -23,16 +23,15 @@ function stockage_user() {
 
 function stockage_monstre() {
 
-	var monstre_donnees = { vie: monstre.getLife(), nb_mort: monstre.getnb_mort(), image: nom_image };
+	var monstre_donnees = { vie: monstre.getLife(), nb_mort: monstre.getnb_mort(), image: nom_image, niveau: monstre.getNiveau() };
 	localStorage.setItem('monstre', JSON.stringify(monstre_donnees));
-
 }
 
 if (click !== null && monstre !== null) {
 
 	var nom_image = monstre['image']
 	var user = new User(click['point'], click['degat'], click['dps'], click['monnaie']);
-	var monstre = new Monstre(monstre['vie'], monstre['nb_mort']);
+	var monstre = new Monstre(monstre['vie'], monstre['nb_mort'], monstre['niveau']);
 }
 else {
 	var user = new User();

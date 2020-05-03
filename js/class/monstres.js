@@ -6,13 +6,13 @@ class Monstre {
     #nb_mort;
     #niveau;
 
-    constructor(vie = 30,nb_mort = 0) {
+    constructor(vie = 30,nb_mort = 0,niveau = 1) {
         this.#life = vie;
         this.#newLife = this.#life;
         this.#mort = 10;
         this.#nb_mort = 0;
         this.#nb_mort = nb_mort;
-        this.#niveau = 1;
+        this.#niveau = niveau;
     }
 
     getLife() {
