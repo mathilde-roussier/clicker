@@ -409,9 +409,12 @@ button:hover {
 }
 
 /*** BARRE DE PROGRESSION ***/
+::-webkit-progress-bar {
+    background-color: #E5E8E8;
+    border-radius: 6px;
+}
 
 #monster_life[value] {
-  background: rgba(0, 0, 0, 0.25);
   border-radius: 6px;
   width: 200px;
 }
@@ -419,31 +422,31 @@ button:hover {
 .green[value]::-webkit-progress-value {
   height: 16px;
   width: 200px;
-  border-radius: 4px;
-  -webkit-transition: 0.4s linear;
-  -moz-transition: 0.4s linear;
-  -o-transition: 0.4s linear;
-  transition: 0.4s linear;
+  border-radius: 6px;
+  -webkit-transition: 0.2s linear;
+  -moz-transition: 0.2s linear;
+  -o-transition: 0.2s linear;
+  transition: 0.2s linear;
   background-color: #80D56B;
 }
 
 .yellow[value]::-webkit-progress-value {
   height: 16px;
-  border-radius: 4px;
-  -webkit-transition: 0.4s linear;
-  -moz-transition: 0.4s linear;
-  -o-transition: 0.4s linear;
-  transition: 0.4s linear;
-  background-color: #F7DC6F ;
+  border-radius: 6px;
+  -webkit-transition: 0.2s linear;
+  -moz-transition: 0.2s linear;
+  -o-transition: 0.2s linear;
+  transition: 0.2s linear;
+  background-color: #F1C40F ;
 }
 
 .red[value]::-webkit-progress-value {
   height: 16px;
-  border-radius: 4px;
-  -webkit-transition: 0.4s linear;
-  -moz-transition: 0.4s linear;
-  -o-transition: 0.4s linear;
-  transition: 0.4s linear;
+  border-radius: 6px;
+  -webkit-transition: 0.2s linear;
+  -moz-transition: 0.2s linear;
+  -o-transition: 0.2s linear;
+  transition: 0.2s linear;
   background-color: #E74C3C;
 }
 
