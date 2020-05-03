@@ -46,6 +46,11 @@ class Monstre {
     setnb_mort() {
         this.#nb_mort = this.#nb_mort + 1;
     }
+
+    resetnb_mort() {
+        this.#nb_mort = this.#nb_mort - this.#nb_mort;
+    }
+
     getnb_mort() {
         return this.#nb_mort;
     }

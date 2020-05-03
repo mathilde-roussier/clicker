@@ -1,4 +1,3 @@
-// localStorage.clear();
 var monstre = new Monstre("30");
 click = JSON.parse(localStorage.getItem('clicker'));
 monstre = JSON.parse(localStorage.getItem('monstre'));
@@ -57,7 +56,7 @@ if (bonus_general !== null) {
 
 	monnaie_depensee = bonus_general['monnaie_utilisee']
 
-	luck =  bonus_general['luck']
+	luck = bonus_general['luck']
 }
 else {
 
@@ -233,7 +232,6 @@ function bonus_luck() {
 
 $(document).ready(function () {
 
-
 	$("#vie_monstre").text(monstre.getNewLife())
 	$("#montant").html(monnaie)
 	$("#niv_bonus_clique").text("Niv." + niv_bonus_clique)
@@ -246,10 +244,7 @@ $(document).ready(function () {
 	$("#damage_profil").text("Dégâts par seconde : " + damage_seconde)
 	$("#sous_utilise").text("Monnaie dépensée :" + monnaie_depensee)
 	$("#gain_de_sous").text("Gain de sous : " + sous)
-	$("#chance_critique").text("Dégâts critiques : " + parseInt((1/luck) * 100) + "%")
-
-
-
+	$("#chance_critique").text("Dégâts critiques : " + parseInt((1 / luck) * 100) + "%")
 
 	if (monstre !== null) {
 
@@ -290,6 +285,8 @@ $(document).ready(function () {
 		$("#vie_monstre").text(monstre.getNewLife())
 
 		$('#monster_life').attr("value", monstre.getLife())
+		$('#niveau').text('Lvl.' + monstre.getNiveau())
+		$('#nb_mort').text(monstre.getnb_mort()+ '/' + monstre.getMort());
 		$("#montant").html(monnaie)
 		$("#image").remove()
 		$("#image_monstre").append("<img id='image' class='" + nom_image + "' src='img/" + nom_image + ".png'>")
@@ -356,21 +353,17 @@ $(document).ready(function () {
 		}
 	});
 
-
-	var nam = 'monstre';
 	$('#monster_life').attr("max", monstre.getLife()).attr("value", monstre.getNewLife());
-
-	$('#niveau').text('Lvl.'+monstre.getNiveau());
-	$('#monstre').html(nam);
+	$('#niveau').text('Lvl.' + monstre.getNiveau());
+	$('#nb_mort').text(monstre.getnb_mort()+ '/' + monstre.getMort());
 
 	dps(user, monstre);
 
 	$("body").on("click", "#image", function () {
 
-		
 		degat_critique = clickdamage
 		if (getRandomInt(luck) === 1) {
-			degat_critique = clickdamage * 4	
+			degat_critique = clickdamage * 4
 			$("#fly-in").remove()
 			$("#vie_monstre").after("<div id='fly-in'></div")
 			$("#fly-in").append("<div>Critique !</div>")
@@ -382,7 +375,6 @@ $(document).ready(function () {
 		monnaie = user.setPoint(sous);
 		$('#montant').html(monnaie);
 		if (monstre.getNewLife() <= 0) {
-
 			nom_image = getRandomInt(nb_monstre)
 			let id = document.getElementById('image')
 			while (id.className == nom_image) {
@@ -396,12 +388,14 @@ $(document).ready(function () {
 			monnaie = user.setPoint(monstre.getMort());
 			$('#montant').html(monnaie);
 			monstre.setnb_mort();
+			$('#nb_mort').text(monstre.getnb_mort()+ '/' + monstre.getMort());
 			if (monstre.getnb_mort() % 10 == 0) {
+				monstre.resetnb_mort();
 				monstre.MajLife(2);
 				monstre.MajNewLife();
 				$('#monster_life').attr("max", monstre.getLife()).attr("value", monstre.getLife());
 				monstre.setNiveau()
-				$('#niveau').text('Lvl.'+monstre.getNiveau())
+				$('#niveau').text('Lvl.' + monstre.getNiveau())
 			}
 		}
 		$("#vie_monstre").text(monstre.getNewLife())
@@ -426,30 +420,30 @@ function dps(user, monstre) {
 
 		$("#image").remove()
 		$("#image_monstre").append("<img id='image' class='" + nom_image + "' src='img/" + nom_image + ".png'>")
-
 		life_actuel = monstre.getLife();
 		monstre.setnb_mort();
 		monnaie = user.setPoint(monstre.getMort());
 		$('#montant').html(monnaie);
+		$('#nb_mort').text(monstre.getnb_mort()+ '/' + monstre.getMort());
 		if (monstre.getnb_mort() % 10 == 0) {
+			monstre.resetnb_mort();
 			monstre.MajLife(2);
 			life_actuel = monstre.MajNewLife();
 			$('#monster_life').attr("max", monstre.getLife()).attr("value", monstre.getLife());
 			monstre.setNiveau()
-			$('#niveau').text('Lvl.'+monstre.getNiveau())
+			$('#niveau').text('Lvl.' + monstre.getNiveau())
 		}
 	}
 	monstre.setDpsNewLife(life_actuel, damage_seconde);
 	stockage_user()
 	stockage_monstre()
 	$('#monster_life').attr('value', monstre.getNewLife());
+
 	if (monstre.getNewLife() <= 0) {
 		$("#vie_monstre").text(0)
 	}
 	else {
 		$("#vie_monstre").text(monstre.getNewLife())
 	}
-
-
 }
 
