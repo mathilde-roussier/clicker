@@ -306,6 +306,9 @@ $(document).ready(function () {
 		$("#prix_bonus_auto_damage").text(prix_bonus_damage)
 		$("#prix_bonus_sous").text(prix_bonus_sous)
 		$("#prix_bonus_clique").text(prix_bonus_clique)
+		$("#niveau_max").remove()
+		$("#luck").remove()
+		$("#max_niv_luck").after("<button id='luck'>Pas disponible</button>")
 		etat_des_sous_disponible()
 
 	});
